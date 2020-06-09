@@ -1,0 +1,54 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="dealReport">
+            <h2><span jhiTranslate="blanatApp.dealReport.detail.title">Deal Report</span> {{ dealReport.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="blanatApp.dealReport.reason">Reason</span></dt>
+                <dd>
+                    <span>{{ dealReport.reason }}</span>
+                </dd>
+                <dt><span jhiTranslate="blanatApp.dealReport.dateReport">Date Report</span></dt>
+                <dd>
+                    <span>{{ dealReport.dateReport }}</span>
+                </dd>
+                <dt><span jhiTranslate="blanatApp.dealReport.dateClose">Date Close</span></dt>
+                <dd>
+                    <span>{{ dealReport.dateClose }}</span>
+                </dd>
+                <dt><span jhiTranslate="blanatApp.dealReport.isValid">Is Valid</span></dt>
+                <dd>
+                    <span>{{ dealReport.isValid }}</span>
+                </dd>
+                <dt><span jhiTranslate="blanatApp.dealReport.assignedTo">Assigned To</span></dt>
+                <dd>
+                    <div *ngIf="dealReport.assignedToId">
+                        <a [routerLink]="['/deal-user', dealReport.assignedToId, 'view']">{{ dealReport.assignedToId }}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="blanatApp.dealReport.deal">Deal</span></dt>
+                <dd>
+                    <div *ngIf="dealReport.dealId">
+                        <a [routerLink]="['/deal', dealReport.dealId, 'view']">{{ dealReport.dealId }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/deal-report', dealReport.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

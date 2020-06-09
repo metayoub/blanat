@@ -1,0 +1,44 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="dealHistory">
+            <h2><span jhiTranslate="blanatApp.dealHistory.detail.title">Deal History</span> {{ dealHistory.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="blanatApp.dealHistory.attributName">Attribut Name</span></dt>
+                <dd>
+                    <span>{{ dealHistory.attributName }}</span>
+                </dd>
+                <dt><span jhiTranslate="blanatApp.dealHistory.attributLastValue">Attribut Last Value</span></dt>
+                <dd>
+                    <span>{{ dealHistory.attributLastValue }}</span>
+                </dd>
+                <dt><span jhiTranslate="blanatApp.dealHistory.dateModification">Date Modification</span></dt>
+                <dd>
+                    <span>{{ dealHistory.dateModification }}</span>
+                </dd>
+                <dt><span jhiTranslate="blanatApp.dealHistory.deal">Deal</span></dt>
+                <dd>
+                    <div *ngIf="dealHistory.dealId">
+                        <a [routerLink]="['/deal', dealHistory.dealId, 'view']">{{ dealHistory.dealId }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/deal-history', dealHistory.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

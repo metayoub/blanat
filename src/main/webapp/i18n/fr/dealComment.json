@@ -1,0 +1,32 @@
+{
+  "blanatApp": {
+    "dealComment": {
+      "home": {
+        "title": "DealComments",
+        "createLabel": "Créer un nouveau Deal Comment",
+        "createOrEditLabel": "Créer ou éditer un Deal Comment",
+        "notFound": "Aucun Deal Comment trouvé"
+      },
+      "created": "Un nouveau Deal Comment a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Deal Comment avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Deal Comment avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Deal Comment {{ id }} ?"
+      },
+      "detail": {
+        "title": "Deal Comment"
+      },
+      "comment": "Comment",
+      "dateComment": "Date Comment",
+      "isActive": "Is Active",
+      "isDeleted": "Is Deleted",
+      "like": "Like",
+      "dislike": "Dislike",
+      "dateLastModification": "Date Last Modification",
+      "dealHistory": "Deal History",
+      "assignedTo": "Assigned To",
+      "parent": "Parent",
+      "deal": "Deal"
+    }
+  }
+}

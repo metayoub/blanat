@@ -1,0 +1,40 @@
+{
+  "name": "DealTrack",
+  "fields": [
+    {
+      "fieldName": "ipLocalisation",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "localisation",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "isAuthentified",
+      "fieldType": "Boolean",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "deal",
+      "otherEntityRelationshipName": "dealTrack",
+      "relationshipValidateRules": "required",
+      "relationshipName": "deal",
+      "otherEntityField": "id"
+    }
+  ],
+  "changelogDate": "20200609090829",
+  "entityTableName": "deal_track",
+  "dto": "mapstruct",
+  "pagination": "pagination",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

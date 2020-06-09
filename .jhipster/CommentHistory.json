@@ -1,0 +1,36 @@
+{
+  "name": "CommentHistory",
+  "fields": [
+    {
+      "fieldName": "comment",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength", "required"],
+      "fieldValidateRulesMaxlength": "1000"
+    },
+    {
+      "fieldName": "dateModification",
+      "fieldType": "LocalDate"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "dealComment",
+      "otherEntityRelationshipName": "dealHistory",
+      "relationshipValidateRules": "required",
+      "relationshipName": "dealComment",
+      "otherEntityField": "id"
+    }
+  ],
+  "changelogDate": "20200609090729",
+  "entityTableName": "comment_history",
+  "dto": "mapstruct",
+  "pagination": "no",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

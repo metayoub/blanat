@@ -1,0 +1,122 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-deal-comment-heading" jhiTranslate="blanatApp.dealComment.home.createOrEditLabel">Create or edit a Deal Comment</h2>
+
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="blanatApp.dealComment.comment" for="field_comment">Comment</label>
+                    <input type="text" class="form-control" name="comment" id="field_comment"
+                           formControlName="comment"/>
+                    <div *ngIf="editForm.get('comment')!.invalid && (editForm.get('comment')!.dirty || editForm.get('comment')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('comment')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('comment')?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 1000 }">
+                        This field cannot be longer than 1000 characters.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="blanatApp.dealComment.dateComment" for="field_dateComment">Date Comment</label>
+                    <div class="input-group">
+                        <input id="field_dateComment" type="text" class="form-control" name="dateComment" ngbDatepicker #dateCommentDp="ngbDatepicker" formControlName="dateComment"/>
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="dateCommentDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="blanatApp.dealComment.isActive" for="field_isActive">Is Active</label>
+                    <input type="checkbox" class="form-control" name="isActive" id="field_isActive"
+                           formControlName="isActive"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="blanatApp.dealComment.isDeleted" for="field_isDeleted">Is Deleted</label>
+                    <input type="checkbox" class="form-control" name="isDeleted" id="field_isDeleted"
+                           formControlName="isDeleted"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="blanatApp.dealComment.like" for="field_like">Like</label>
+                    <input type="number" class="form-control" name="like" id="field_like"
+                           formControlName="like"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="blanatApp.dealComment.dislike" for="field_dislike">Dislike</label>
+                    <input type="number" class="form-control" name="dislike" id="field_dislike"
+                           formControlName="dislike"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="blanatApp.dealComment.dateLastModification" for="field_dateLastModification">Date Last Modification</label>
+                    <div class="input-group">
+                        <input id="field_dateLastModification" type="text" class="form-control" name="dateLastModification" ngbDatepicker #dateLastModificationDp="ngbDatepicker" formControlName="dateLastModification"/>
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="dateLastModificationDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="blanatApp.dealComment.assignedTo" for="field_assignedTo">Assigned To</label>
+                    <select class="form-control" id="field_assignedTo" name="assignedTo" formControlName="assignedToId">
+                        <option *ngIf="!editForm.get('assignedToId')!.value" [ngValue]="null" selected></option>
+                        <option [ngValue]="dealUserOption.id" *ngFor="let dealUserOption of dealusers; trackBy: trackById">{{ dealUserOption.id }}</option>
+                    </select>
+                </div>
+                <div *ngIf="editForm.get('assignedToId')!.invalid && (editForm.get('assignedToId')!.dirty || editForm.get('assignedToId')!.touched)">
+                    <small class="form-text text-danger"
+                           *ngIf="editForm.get('assignedToId')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="blanatApp.dealComment.parent" for="field_parent">Parent</label>
+                    <select class="form-control" id="field_parent" name="parent" formControlName="parentId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="dealCommentOption.id" *ngFor="let dealCommentOption of dealcomments; trackBy: trackById">{{ dealCommentOption.id }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="blanatApp.dealComment.deal" for="field_deal">Deal</label>
+                    <select class="form-control" id="field_deal" name="deal" formControlName="dealId">
+                        <option *ngIf="!editForm.get('dealId')!.value" [ngValue]="null" selected></option>
+                        <option [ngValue]="dealOption.id" *ngFor="let dealOption of deals; trackBy: trackById">{{ dealOption.id }}</option>
+                    </select>
+                </div>
+                <div *ngIf="editForm.get('dealId')!.invalid && (editForm.get('dealId')!.dirty || editForm.get('dealId')!.touched)">
+                    <small class="form-text text-danger"
+                           *ngIf="editForm.get('dealId')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
+            </div>
+
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

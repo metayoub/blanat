@@ -1,0 +1,174 @@
+{
+  "name": "Deal",
+  "fields": [
+    {
+      "fieldName": "title",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength", "required"],
+      "fieldValidateRulesMaxlength": "10000"
+    },
+    {
+      "fieldName": "type",
+      "fieldType": "TypeDeal",
+      "fieldValues": "DEAL,COUPON",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "url",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "image",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "price",
+      "fieldType": "Float"
+    },
+    {
+      "fieldName": "priceNormal",
+      "fieldType": "Float"
+    },
+    {
+      "fieldName": "priceShipping",
+      "fieldType": "Float"
+    },
+    {
+      "fieldName": "coupon",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "couponType",
+      "fieldType": "TypeCoupon",
+      "fieldValues": "PERCENTAGE,DHS"
+    },
+    {
+      "fieldName": "couponValue",
+      "fieldType": "Float"
+    },
+    {
+      "fieldName": "couponPercentage",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["min", "max"],
+      "fieldValidateRulesMin": "1",
+      "fieldValidateRulesMax": "100"
+    },
+    {
+      "fieldName": "dateStart",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "dateEnd",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "datePublication",
+      "fieldType": "LocalDate",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "views",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "like",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "dislike",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "local",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "statut",
+      "fieldType": "StatutDeal",
+      "fieldValues": "ACTIVE,HIDDEN,EXPIRED,PENDING",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "isDeleted",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "isBlocked",
+      "fieldType": "Boolean"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-one",
+      "otherEntityName": "dealLocation",
+      "otherEntityRelationshipName": "deal",
+      "relationshipName": "dealLocation",
+      "otherEntityField": "id",
+      "ownerSide": true
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "dealHistory",
+      "otherEntityRelationshipName": "deal",
+      "relationshipName": "dealHistory"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "dealTrack",
+      "otherEntityRelationshipName": "deal",
+      "relationshipName": "dealTrack"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "dealReport",
+      "otherEntityRelationshipName": "deal",
+      "relationshipName": "dealReport"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "dealComment",
+      "otherEntityRelationshipName": "deal",
+      "relationshipName": "dealComment"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "dealUser",
+      "otherEntityRelationshipName": "deal",
+      "relationshipValidateRules": "required",
+      "relationshipName": "assignedTo",
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipType": "many-to-many",
+      "otherEntityName": "dealCategory",
+      "otherEntityRelationshipName": "deal",
+      "relationshipName": "dealCategory",
+      "otherEntityField": "name",
+      "ownerSide": true
+    },
+    {
+      "relationshipType": "many-to-many",
+      "otherEntityName": "dealUser",
+      "otherEntityRelationshipName": "dealSaved",
+      "relationshipName": "dealUser",
+      "otherEntityField": "id",
+      "ownerSide": false
+    }
+  ],
+  "changelogDate": "20200609090229",
+  "entityTableName": "deal",
+  "dto": "mapstruct",
+  "pagination": "infinite-scroll",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

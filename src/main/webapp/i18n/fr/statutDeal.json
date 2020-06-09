@@ -1,0 +1,11 @@
+{
+  "blanatApp": {
+    "StatutDeal": {
+      "null": "",
+      "ACTIVE": "ACTIVE",
+      "HIDDEN": "HIDDEN",
+      "EXPIRED": "EXPIRED",
+      "PENDING": "PENDING"
+    }
+  }
+}

@@ -1,0 +1,102 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-deal-report-heading" jhiTranslate="blanatApp.dealReport.home.createOrEditLabel">Create or edit a Deal Report</h2>
+
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="blanatApp.dealReport.reason" for="field_reason">Reason</label>
+                    <input type="text" class="form-control" name="reason" id="field_reason"
+                           formControlName="reason"/>
+                    <div *ngIf="editForm.get('reason')!.invalid && (editForm.get('reason')!.dirty || editForm.get('reason')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('reason')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('reason')?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 1000 }">
+                        This field cannot be longer than 1000 characters.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="blanatApp.dealReport.dateReport" for="field_dateReport">Date Report</label>
+                    <div class="input-group">
+                        <input id="field_dateReport" type="text" class="form-control" name="dateReport" ngbDatepicker #dateReportDp="ngbDatepicker" formControlName="dateReport"/>
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="dateReportDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+                        </span>
+                    </div>
+                    <div *ngIf="editForm.get('dateReport')!.invalid && (editForm.get('dateReport')!.dirty || editForm.get('dateReport')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('dateReport')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="blanatApp.dealReport.dateClose" for="field_dateClose">Date Close</label>
+                    <div class="input-group">
+                        <input id="field_dateClose" type="text" class="form-control" name="dateClose" ngbDatepicker #dateCloseDp="ngbDatepicker" formControlName="dateClose"/>
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="dateCloseDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="blanatApp.dealReport.isValid" for="field_isValid">Is Valid</label>
+                    <input type="checkbox" class="form-control" name="isValid" id="field_isValid"
+                           formControlName="isValid"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="blanatApp.dealReport.assignedTo" for="field_assignedTo">Assigned To</label>
+                    <select class="form-control" id="field_assignedTo" name="assignedTo" formControlName="assignedToId">
+                        <option *ngIf="!editForm.get('assignedToId')!.value" [ngValue]="null" selected></option>
+                        <option [ngValue]="dealUserOption.id" *ngFor="let dealUserOption of dealusers; trackBy: trackById">{{ dealUserOption.id }}</option>
+                    </select>
+                </div>
+                <div *ngIf="editForm.get('assignedToId')!.invalid && (editForm.get('assignedToId')!.dirty || editForm.get('assignedToId')!.touched)">
+                    <small class="form-text text-danger"
+                           *ngIf="editForm.get('assignedToId')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="blanatApp.dealReport.deal" for="field_deal">Deal</label>
+                    <select class="form-control" id="field_deal" name="deal" formControlName="dealId">
+                        <option *ngIf="!editForm.get('dealId')!.value" [ngValue]="null" selected></option>
+                        <option [ngValue]="dealOption.id" *ngFor="let dealOption of deals; trackBy: trackById">{{ dealOption.id }}</option>
+                    </select>
+                </div>
+                <div *ngIf="editForm.get('dealId')!.invalid && (editForm.get('dealId')!.dirty || editForm.get('dealId')!.touched)">
+                    <small class="form-text text-danger"
+                           *ngIf="editForm.get('dealId')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
+            </div>
+
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

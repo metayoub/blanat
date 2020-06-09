@@ -1,0 +1,25 @@
+{
+  "blanatApp": {
+    "dealTrack": {
+      "home": {
+        "title": "DealTracks",
+        "createLabel": "Créer un nouveau Deal Track",
+        "createOrEditLabel": "Créer ou éditer un Deal Track",
+        "notFound": "Aucun Deal Track trouvé"
+      },
+      "created": "Un nouveau Deal Track a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Deal Track avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Deal Track avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Deal Track {{ id }} ?"
+      },
+      "detail": {
+        "title": "Deal Track"
+      },
+      "ipLocalisation": "Ip Localisation",
+      "localisation": "Localisation",
+      "isAuthentified": "Is Authentified",
+      "deal": "Deal"
+    }
+  }
+}

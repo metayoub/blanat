@@ -1,0 +1,81 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="blanatApp.dealTrack.home.title">Deal Tracks</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-deal-track" [routerLink]="['/deal-track/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span  jhiTranslate="blanatApp.dealTrack.home.createLabel">
+            Create a new Deal Track
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="dealTracks?.length === 0">
+        <span jhiTranslate="blanatApp.dealTrack.home.notFound">No dealTracks found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="dealTracks && dealTracks.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+                    <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="ipLocalisation"><span jhiTranslate="blanatApp.dealTrack.ipLocalisation">Ip Localisation</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="localisation"><span jhiTranslate="blanatApp.dealTrack.localisation">Localisation</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="isAuthentified"><span jhiTranslate="blanatApp.dealTrack.isAuthentified">Is Authentified</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="dealId"><span jhiTranslate="blanatApp.dealTrack.deal">Deal</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let dealTrack of dealTracks ;trackBy: trackId">
+                    <td><a [routerLink]="['/deal-track', dealTrack.id, 'view']">{{ dealTrack.id }}</a></td>
+                    <td>{{ dealTrack.ipLocalisation }}</td>
+                    <td>{{ dealTrack.localisation }}</td>
+                    <td>{{ dealTrack.isAuthentified }}</td>
+                    <td>
+                        <div *ngIf="dealTrack.dealId">
+                            <a [routerLink]="['/deal', dealTrack.dealId , 'view']" >{{ dealTrack.dealId }}</a>
+                        </div>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/deal-track', dealTrack.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/deal-track', dealTrack.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(dealTrack)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div *ngIf="dealTracks && dealTracks.length > 0">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="ngbPaginationPage" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage($event)"></ngb-pagination>
+        </div>
+    </div>
+</div>

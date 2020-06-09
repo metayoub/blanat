@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd">
+    <!--
+        Added the constraints for entity DealReport.
+    -->
+    <changeSet id="20200609090529-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="assigned_to_id"
+                                 baseTableName="deal_report"
+                                 constraintName="fk_deal_report_assigned_to_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="deal_user"/>
+
+        <addForeignKeyConstraint baseColumnNames="deal_id"
+                                 baseTableName="deal_report"
+                                 constraintName="fk_deal_report_deal_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="deal"/>
+
+    </changeSet>
+</databaseChangeLog>

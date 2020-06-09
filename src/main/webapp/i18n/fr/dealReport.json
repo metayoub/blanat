@@ -1,0 +1,27 @@
+{
+  "blanatApp": {
+    "dealReport": {
+      "home": {
+        "title": "DealReports",
+        "createLabel": "Créer un nouveau Deal Report",
+        "createOrEditLabel": "Créer ou éditer un Deal Report",
+        "notFound": "Aucun Deal Report trouvé"
+      },
+      "created": "Un nouveau Deal Report a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Deal Report avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Deal Report avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Deal Report {{ id }} ?"
+      },
+      "detail": {
+        "title": "Deal Report"
+      },
+      "reason": "Reason",
+      "dateReport": "Date Report",
+      "dateClose": "Date Close",
+      "isValid": "Is Valid",
+      "assignedTo": "Assigned To",
+      "deal": "Deal"
+    }
+  }
+}

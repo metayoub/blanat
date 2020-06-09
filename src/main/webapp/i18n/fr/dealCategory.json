@@ -1,0 +1,26 @@
+{
+  "blanatApp": {
+    "dealCategory": {
+      "home": {
+        "title": "DealCategories",
+        "createLabel": "Créer un nouveau Deal Category",
+        "createOrEditLabel": "Créer ou éditer un Deal Category",
+        "notFound": "Aucun Deal Category trouvé"
+      },
+      "created": "Un nouveau Deal Category a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Deal Category avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Deal Category avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Deal Category {{ id }} ?"
+      },
+      "detail": {
+        "title": "Deal Category"
+      },
+      "name": "Name",
+      "description": "Description",
+      "isParent": "Is Parent",
+      "category": "Category",
+      "deal": "Deal"
+    }
+  }
+}

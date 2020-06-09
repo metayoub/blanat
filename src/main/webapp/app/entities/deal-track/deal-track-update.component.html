@@ -1,0 +1,70 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-deal-track-heading" jhiTranslate="blanatApp.dealTrack.home.createOrEditLabel">Create or edit a Deal Track</h2>
+
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="blanatApp.dealTrack.ipLocalisation" for="field_ipLocalisation">Ip Localisation</label>
+                    <input type="text" class="form-control" name="ipLocalisation" id="field_ipLocalisation"
+                           formControlName="ipLocalisation"/>
+                    <div *ngIf="editForm.get('ipLocalisation')!.invalid && (editForm.get('ipLocalisation')!.dirty || editForm.get('ipLocalisation')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('ipLocalisation')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="blanatApp.dealTrack.localisation" for="field_localisation">Localisation</label>
+                    <input type="text" class="form-control" name="localisation" id="field_localisation"
+                           formControlName="localisation"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="blanatApp.dealTrack.isAuthentified" for="field_isAuthentified">Is Authentified</label>
+                    <input type="checkbox" class="form-control" name="isAuthentified" id="field_isAuthentified"
+                           formControlName="isAuthentified"/>
+                    <div *ngIf="editForm.get('isAuthentified')!.invalid && (editForm.get('isAuthentified')!.dirty || editForm.get('isAuthentified')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('isAuthentified')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="blanatApp.dealTrack.deal" for="field_deal">Deal</label>
+                    <select class="form-control" id="field_deal" name="deal" formControlName="dealId">
+                        <option *ngIf="!editForm.get('dealId')!.value" [ngValue]="null" selected></option>
+                        <option [ngValue]="dealOption.id" *ngFor="let dealOption of deals; trackBy: trackById">{{ dealOption.id }}</option>
+                    </select>
+                </div>
+                <div *ngIf="editForm.get('dealId')!.invalid && (editForm.get('dealId')!.dirty || editForm.get('dealId')!.touched)">
+                    <small class="form-text text-danger"
+                           *ngIf="editForm.get('dealId')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
+            </div>
+
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

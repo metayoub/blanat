@@ -1,0 +1,80 @@
+{
+  "name": "DealUser",
+  "fields": [
+    {
+      "fieldName": "gender",
+      "fieldType": "Gender",
+      "fieldValues": "MALE,FEMALE",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "phone",
+      "fieldType": "String",
+      "fieldValidateRules": ["pattern"],
+      "fieldValidateRulesPattern": "^(?:0|\\(?\\+212\\)?\\s?|00212\\s?)[1-79](?:[\\.\\-\\s]?\\d\\d)"
+    },
+    {
+      "fieldName": "address",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "city",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "birthDay",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "comment",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "notification",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "reporting",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "emailNotification",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "message",
+      "fieldType": "Boolean"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-one",
+      "otherEntityName": "user",
+      "otherEntityRelationshipName": "dealUser",
+      "relationshipValidateRules": "required",
+      "relationshipName": "user",
+      "otherEntityField": "id",
+      "ownerSide": true,
+      "useJPADerivedIdentifier": true
+    },
+    {
+      "relationshipType": "many-to-many",
+      "otherEntityName": "deal",
+      "otherEntityRelationshipName": "dealUser",
+      "relationshipName": "dealSaved",
+      "otherEntityField": "title",
+      "ownerSide": true
+    }
+  ],
+  "changelogDate": "20200609090929",
+  "entityTableName": "deal_user",
+  "dto": "mapstruct",
+  "pagination": "pagination",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

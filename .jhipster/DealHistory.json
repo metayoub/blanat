@@ -1,0 +1,42 @@
+{
+  "name": "DealHistory",
+  "fields": [
+    {
+      "fieldName": "attributName",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "attributLastValue",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength", "required"],
+      "fieldValidateRulesMaxlength": "10000"
+    },
+    {
+      "fieldName": "dateModification",
+      "fieldType": "LocalDate",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "deal",
+      "otherEntityRelationshipName": "dealHistory",
+      "relationshipValidateRules": "required",
+      "relationshipName": "deal",
+      "otherEntityField": "id"
+    }
+  ],
+  "changelogDate": "20200609090429",
+  "entityTableName": "deal_history",
+  "dto": "mapstruct",
+  "pagination": "pagination",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

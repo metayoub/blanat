@@ -1,0 +1,53 @@
+{
+  "name": "DealReport",
+  "fields": [
+    {
+      "fieldName": "reason",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength", "required"],
+      "fieldValidateRulesMaxlength": "1000"
+    },
+    {
+      "fieldName": "dateReport",
+      "fieldType": "LocalDate",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "dateClose",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "isValid",
+      "fieldType": "Boolean"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "dealUser",
+      "otherEntityRelationshipName": "dealReport",
+      "relationshipValidateRules": "required",
+      "relationshipName": "assignedTo",
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "deal",
+      "otherEntityRelationshipName": "dealReport",
+      "relationshipValidateRules": "required",
+      "relationshipName": "deal",
+      "otherEntityField": "id"
+    }
+  ],
+  "changelogDate": "20200609090529",
+  "entityTableName": "deal_report",
+  "dto": "mapstruct",
+  "pagination": "pagination",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

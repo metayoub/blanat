@@ -1,0 +1,33 @@
+{
+  "blanatApp": {
+    "dealUser": {
+      "home": {
+        "title": "DealUsers",
+        "createLabel": "Créer un nouveau Deal User",
+        "createOrEditLabel": "Créer ou éditer un Deal User",
+        "notFound": "Aucun Deal User trouvé"
+      },
+      "created": "Un nouveau Deal User a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Deal User avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Deal User avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Deal User {{ id }} ?"
+      },
+      "detail": {
+        "title": "Deal User"
+      },
+      "gender": "Gender",
+      "phone": "Phone",
+      "address": "Address",
+      "city": "City",
+      "birthDay": "Birth Day",
+      "comment": "Comment",
+      "notification": "Notification",
+      "reporting": "Reporting",
+      "emailNotification": "Email Notification",
+      "message": "Message",
+      "user": "User",
+      "dealSaved": "Deal Saved"
+    }
+  }
+}

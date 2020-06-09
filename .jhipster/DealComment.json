@@ -1,0 +1,77 @@
+{
+  "name": "DealComment",
+  "fields": [
+    {
+      "fieldName": "comment",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength", "required"],
+      "fieldValidateRulesMaxlength": "1000"
+    },
+    {
+      "fieldName": "dateComment",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "isActive",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "isDeleted",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "like",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "dislike",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "dateLastModification",
+      "fieldType": "LocalDate"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "commentHistory",
+      "otherEntityRelationshipName": "dealComment",
+      "relationshipName": "dealHistory"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "dealUser",
+      "otherEntityRelationshipName": "dealComment",
+      "relationshipValidateRules": "required",
+      "relationshipName": "assignedTo",
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "dealComment",
+      "otherEntityRelationshipName": "dealComment",
+      "relationshipName": "parent",
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "deal",
+      "otherEntityRelationshipName": "dealComment",
+      "relationshipValidateRules": "required",
+      "relationshipName": "deal",
+      "otherEntityField": "id"
+    }
+  ],
+  "changelogDate": "20200609090629",
+  "entityTableName": "deal_comment",
+  "dto": "mapstruct",
+  "pagination": "infinite-scroll",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

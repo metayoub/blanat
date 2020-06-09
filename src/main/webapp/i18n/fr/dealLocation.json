@@ -1,0 +1,23 @@
+{
+  "blanatApp": {
+    "dealLocation": {
+      "home": {
+        "title": "DealLocations",
+        "createLabel": "Créer un nouveau Deal Location",
+        "createOrEditLabel": "Créer ou éditer un Deal Location",
+        "notFound": "Aucun Deal Location trouvé"
+      },
+      "created": "Un nouveau Deal Location a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Deal Location avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Deal Location avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Deal Location {{ id }} ?"
+      },
+      "detail": {
+        "title": "Deal Location"
+      },
+      "city": "City",
+      "country": "Country"
+    }
+  }
+}

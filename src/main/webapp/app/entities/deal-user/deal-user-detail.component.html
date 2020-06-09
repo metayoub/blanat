@@ -1,0 +1,76 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="dealUser">
+            <h2><span jhiTranslate="blanatApp.dealUser.detail.title">Deal User</span> {{ dealUser.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="blanatApp.dealUser.gender">Gender</span></dt>
+                <dd>
+                    <span jhiTranslate="{{ 'blanatApp.Gender.' + dealUser.gender }}">{{ dealUser.gender }}</span>
+                </dd>
+                <dt><span jhiTranslate="blanatApp.dealUser.phone">Phone</span></dt>
+                <dd>
+                    <span>{{ dealUser.phone }}</span>
+                </dd>
+                <dt><span jhiTranslate="blanatApp.dealUser.address">Address</span></dt>
+                <dd>
+                    <span>{{ dealUser.address }}</span>
+                </dd>
+                <dt><span jhiTranslate="blanatApp.dealUser.city">City</span></dt>
+                <dd>
+                    <span>{{ dealUser.city }}</span>
+                </dd>
+                <dt><span jhiTranslate="blanatApp.dealUser.birthDay">Birth Day</span></dt>
+                <dd>
+                    <span>{{ dealUser.birthDay }}</span>
+                </dd>
+                <dt><span jhiTranslate="blanatApp.dealUser.comment">Comment</span></dt>
+                <dd>
+                    <span>{{ dealUser.comment }}</span>
+                </dd>
+                <dt><span jhiTranslate="blanatApp.dealUser.notification">Notification</span></dt>
+                <dd>
+                    <span>{{ dealUser.notification }}</span>
+                </dd>
+                <dt><span jhiTranslate="blanatApp.dealUser.reporting">Reporting</span></dt>
+                <dd>
+                    <span>{{ dealUser.reporting }}</span>
+                </dd>
+                <dt><span jhiTranslate="blanatApp.dealUser.emailNotification">Email Notification</span></dt>
+                <dd>
+                    <span>{{ dealUser.emailNotification }}</span>
+                </dd>
+                <dt><span jhiTranslate="blanatApp.dealUser.message">Message</span></dt>
+                <dd>
+                    <span>{{ dealUser.message }}</span>
+                </dd>
+                <dt><span jhiTranslate="blanatApp.dealUser.user">User</span></dt>
+                <dd>
+                    {{ dealUser.userId }}
+                </dd>
+                <dt><span jhiTranslate="blanatApp.dealUser.dealSaved">Deal Saved</span></dt>
+                <dd>
+                    <span *ngFor="let dealSaved of dealUser.dealSaveds; let last = last">
+                        <a [routerLink]="['/deal', dealSaved?.id, 'view']">{{ dealSaved.title }}</a>{{ last ? '' : ', ' }}
+                    </span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/deal-user', dealUser.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

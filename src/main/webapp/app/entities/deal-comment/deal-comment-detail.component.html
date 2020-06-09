@@ -1,0 +1,72 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="dealComment">
+            <h2><span jhiTranslate="blanatApp.dealComment.detail.title">Deal Comment</span> {{ dealComment.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="blanatApp.dealComment.comment">Comment</span></dt>
+                <dd>
+                    <span>{{ dealComment.comment }}</span>
+                </dd>
+                <dt><span jhiTranslate="blanatApp.dealComment.dateComment">Date Comment</span></dt>
+                <dd>
+                    <span>{{ dealComment.dateComment }}</span>
+                </dd>
+                <dt><span jhiTranslate="blanatApp.dealComment.isActive">Is Active</span></dt>
+                <dd>
+                    <span>{{ dealComment.isActive }}</span>
+                </dd>
+                <dt><span jhiTranslate="blanatApp.dealComment.isDeleted">Is Deleted</span></dt>
+                <dd>
+                    <span>{{ dealComment.isDeleted }}</span>
+                </dd>
+                <dt><span jhiTranslate="blanatApp.dealComment.like">Like</span></dt>
+                <dd>
+                    <span>{{ dealComment.like }}</span>
+                </dd>
+                <dt><span jhiTranslate="blanatApp.dealComment.dislike">Dislike</span></dt>
+                <dd>
+                    <span>{{ dealComment.dislike }}</span>
+                </dd>
+                <dt><span jhiTranslate="blanatApp.dealComment.dateLastModification">Date Last Modification</span></dt>
+                <dd>
+                    <span>{{ dealComment.dateLastModification }}</span>
+                </dd>
+                <dt><span jhiTranslate="blanatApp.dealComment.assignedTo">Assigned To</span></dt>
+                <dd>
+                    <div *ngIf="dealComment.assignedToId">
+                        <a [routerLink]="['/deal-user', dealComment.assignedToId, 'view']">{{ dealComment.assignedToId }}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="blanatApp.dealComment.parent">Parent</span></dt>
+                <dd>
+                    <div *ngIf="dealComment.parentId">
+                        <a [routerLink]="['/deal-comment', dealComment.parentId, 'view']">{{ dealComment.parentId }}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="blanatApp.dealComment.deal">Deal</span></dt>
+                <dd>
+                    <div *ngIf="dealComment.dealId">
+                        <a [routerLink]="['/deal', dealComment.dealId, 'view']">{{ dealComment.dealId }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/deal-comment', dealComment.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

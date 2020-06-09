@@ -1,0 +1,24 @@
+{
+  "blanatApp": {
+    "commentHistory": {
+      "home": {
+        "title": "CommentHistories",
+        "createLabel": "Créer un nouveau Comment History",
+        "createOrEditLabel": "Créer ou éditer un Comment History",
+        "notFound": "Aucun Comment History trouvé"
+      },
+      "created": "Un nouveau Comment History a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Comment History avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Comment History avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Comment History {{ id }} ?"
+      },
+      "detail": {
+        "title": "Comment History"
+      },
+      "comment": "Comment",
+      "dateModification": "Date Modification",
+      "dealComment": "Deal Comment"
+    }
+  }
+}

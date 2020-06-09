@@ -1,0 +1,25 @@
+{
+  "blanatApp": {
+    "dealHistory": {
+      "home": {
+        "title": "DealHistories",
+        "createLabel": "Créer un nouveau Deal History",
+        "createOrEditLabel": "Créer ou éditer un Deal History",
+        "notFound": "Aucun Deal History trouvé"
+      },
+      "created": "Un nouveau Deal History a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Deal History avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Deal History avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Deal History {{ id }} ?"
+      },
+      "detail": {
+        "title": "Deal History"
+      },
+      "attributName": "Attribut Name",
+      "attributLastValue": "Attribut Last Value",
+      "dateModification": "Date Modification",
+      "deal": "Deal"
+    }
+  }
+}

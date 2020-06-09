@@ -1,0 +1,51 @@
+{
+  "blanatApp": {
+    "deal": {
+      "home": {
+        "title": "Deals",
+        "createLabel": "Créer un nouveau Deal",
+        "createOrEditLabel": "Créer ou éditer un Deal",
+        "notFound": "Aucun Deal trouvé"
+      },
+      "created": "Un nouveau Deal a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Deal avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Deal avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Deal {{ id }} ?"
+      },
+      "detail": {
+        "title": "Deal"
+      },
+      "title": "Title",
+      "description": "Description",
+      "type": "Type",
+      "url": "Url",
+      "image": "Image",
+      "price": "Price",
+      "priceNormal": "Price Normal",
+      "priceShipping": "Price Shipping",
+      "coupon": "Coupon",
+      "couponType": "Coupon Type",
+      "couponValue": "Coupon Value",
+      "couponPercentage": "Coupon Percentage",
+      "dateStart": "Date Start",
+      "dateEnd": "Date End",
+      "datePublication": "Date Publication",
+      "views": "Views",
+      "like": "Like",
+      "dislike": "Dislike",
+      "local": "Local",
+      "statut": "Statut",
+      "isDeleted": "Is Deleted",
+      "isBlocked": "Is Blocked",
+      "dealLocation": "Deal Location",
+      "dealHistory": "Deal History",
+      "dealTrack": "Deal Track",
+      "dealReport": "Deal Report",
+      "dealComment": "Deal Comment",
+      "assignedTo": "Assigned To",
+      "dealCategory": "Deal Category",
+      "dealUser": "Deal User"
+    }
+  }
+}

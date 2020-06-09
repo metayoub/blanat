@@ -1,0 +1,44 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="dealTrack">
+            <h2><span jhiTranslate="blanatApp.dealTrack.detail.title">Deal Track</span> {{ dealTrack.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="blanatApp.dealTrack.ipLocalisation">Ip Localisation</span></dt>
+                <dd>
+                    <span>{{ dealTrack.ipLocalisation }}</span>
+                </dd>
+                <dt><span jhiTranslate="blanatApp.dealTrack.localisation">Localisation</span></dt>
+                <dd>
+                    <span>{{ dealTrack.localisation }}</span>
+                </dd>
+                <dt><span jhiTranslate="blanatApp.dealTrack.isAuthentified">Is Authentified</span></dt>
+                <dd>
+                    <span>{{ dealTrack.isAuthentified }}</span>
+                </dd>
+                <dt><span jhiTranslate="blanatApp.dealTrack.deal">Deal</span></dt>
+                <dd>
+                    <div *ngIf="dealTrack.dealId">
+                        <a [routerLink]="['/deal', dealTrack.dealId, 'view']">{{ dealTrack.dealId }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/deal-track', dealTrack.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

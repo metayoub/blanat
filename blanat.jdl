@@ -1,0 +1,129 @@
+/* Deal */
+entity Deal {
+    title String required
+    description String maxlength(10000) required
+    type TypeDeal required
+    url String
+    image String
+    price Float
+    priceNormal Float
+    priceShipping Float
+    coupon String
+    couponType TypeCoupon
+    couponValue Float
+    couponPercentage Integer min(1) max(100) 
+    dateStart LocalDate
+    dateEnd LocalDate
+    datePublication LocalDate required
+    views Long
+    like Long
+    dislike Long
+    local Boolean
+    statut StatutDeal required
+    isDeleted Boolean
+    isBlocked Boolean
+}
+
+enum TypeDeal {
+    DEAL, COUPON 
+}
+enum TypeCoupon {
+    PERCENTAGE, DHS 
+}
+enum StatutDeal {
+    ACTIVE, HIDDEN, EXPIRED, PENDING
+}
+
+entity DealCategory {
+    name String required unique
+    description String maxlength(1000)
+    isParent Boolean
+}
+
+entity DealHistory {
+    attributName String required
+    attributLastValue String maxlength(10000) required
+    dateModification LocalDate required
+}
+
+entity DealReport {
+    reason String maxlength(1000) required
+    dateReport LocalDate required
+    dateClose LocalDate
+    isValid Boolean
+}
+
+entity DealComment {
+    comment String maxlength(1000) required
+    dateComment LocalDate
+    isActive Boolean
+    isDeleted Boolean
+    like Long
+    dislike Long 
+    dateLastModification LocalDate
+}
+
+entity CommentHistory {
+    comment String  maxlength(1000) required
+    dateModification LocalDate
+}
+
+entity DealTrack {
+    ipLocalisation String required
+    localisation String
+    isAuthentified Boolean required
+}
+
+entity DealUser {
+    gender Gender required
+    phone String pattern(/^(?:0|\(?\+212\)?\s?|00212\s?)[1-79](?:[\.\-\s]?\d\d)/)
+    address String 
+    city String
+    birthDay LocalDate
+    comment Boolean
+    notification Boolean
+    reporting Boolean
+    emailNotification Boolean
+    message Boolean
+}
+
+enum Gender {
+    MALE, FEMALE
+}
+
+entity DealLocation {
+    city String unique required
+    country String
+}
+
+relationship OneToOne {
+    Deal{dealLocation} to DealLocation
+    DealUser{user required} to User with jpaDerivedIdentifier 
+}
+
+relationship OneToMany {
+    Deal{dealHistory} to DealHistory{deal required}
+    Deal{dealTrack} to DealTrack{deal required}
+    Deal{dealReport} to DealReport{deal required}
+    Deal{dealComment} to DealComment{deal required}
+    DealComment{dealHistory} to CommentHistory{dealComment required}
+
+}
+
+relationship ManyToOne {
+    Deal{assignedTo required} to DealUser,
+    DealComment{assignedTo required} to DealUser
+    DealReport{assignedTo required} to DealUser
+    DealComment{parent} to DealComment
+    DealCategory{category(name)} to DealCategory
+}
+
+relationship ManyToMany {
+    Deal{dealCategory(name)} to DealCategory{deal}
+    DealUser{dealSaved(title)} to Deal{dealUser} 
+}
+
+dto * with mapstruct
+service * with serviceClass
+paginate Deal, DealCategory, DealComment, DealHistory, DealReport, DealTrack, DealUser with pagination
+paginate Deal, DealComment with infinite-scroll
