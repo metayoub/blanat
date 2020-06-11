@@ -23,9 +23,24 @@ export class DealUserUpdateComponent implements OnInit {
   users: IUser[] = [];
   deals: IDeal[] = [];
   birthDayDp: any;
+  user: any = {}; // a supprimer
+  authorities: string[] = [];
 
   editForm = this.fb.group({
     id: [],
+    login: [
+      '',
+      [
+        Validators.required,
+        Validators.minLength(1),
+        Validators.maxLength(50),
+        Validators.pattern('^[a-zA-Z0-9!$&*+=?^_`{|}~.-]+@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*$|^[_.@A-Za-z0-9-]+$'),
+      ],
+    ],
+    firstName: ['', [Validators.maxLength(50)]],
+    lastName: ['', [Validators.maxLength(50)]],
+    email: ['', [Validators.minLength(5), Validators.maxLength(254), Validators.email]],
+    activated: [],
     gender: [null, [Validators.required]],
     phone: [null, [Validators.pattern('^(?:0|\\(?\\+212\\)?\\s?|00212\\s?)[1-79](?:[\\.\\-\\s]?\\d\\d)')]],
     address: [],
@@ -38,6 +53,7 @@ export class DealUserUpdateComponent implements OnInit {
     message: [],
     userId: [null, Validators.required],
     dealSaveds: [],
+    authorities: [],
   });
 
   constructor(

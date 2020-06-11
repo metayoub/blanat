@@ -1,125 +1,267 @@
 <div class="row justify-content-center">
     <div class="col-8">
-        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
-            <h2 id="jhi-deal-user-heading" jhiTranslate="blanatApp.dealUser.home.createOrEditLabel">Create or edit a Deal User</h2>
-
-            <div>
-                <jhi-alert-error></jhi-alert-error>
-
-                <div class="form-group" [hidden]="!editForm.get('id')!.value">
-                    <label for="id" jhiTranslate="global.field.id">ID</label>
-                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
-                </div>
-
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="blanatApp.dealUser.gender" for="field_gender">Gender</label>
-                    <select class="form-control" name="gender" formControlName="gender" id="field_gender">
-                        <option value="MALE">{{ 'blanatApp.Gender.MALE' | translate }}</option>
-                        <option value="FEMALE">{{ 'blanatApp.Gender.FEMALE' | translate }}</option>
-                    </select>
-                    <div *ngIf="editForm.get('gender')!.invalid && (editForm.get('gender')!.dirty || editForm.get('gender')!.touched)">
-                        <small class="form-text text-danger"
-                               *ngIf="editForm.get('gender')?.errors?.required" jhiTranslate="entity.validation.required">
-                        This field is required.
-                        </small>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="blanatApp.dealUser.phone" for="field_phone">Phone</label>
-                    <input type="text" class="form-control" name="phone" id="field_phone"
-                           formControlName="phone"/>
-                    <div *ngIf="editForm.get('phone')!.invalid && (editForm.get('phone')!.dirty || editForm.get('phone')!.touched)">
-                        <small class="form-text text-danger"
-                               *ngIf="editForm.get('phone')?.errors?.pattern" jhiTranslate="entity.validation.pattern" [translateValues]="{ pattern: 'Phone' }">
-                            This field should follow pattern for "Phone".
-                        </small>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="blanatApp.dealUser.address" for="field_address">Address</label>
-                    <input type="text" class="form-control" name="address" id="field_address"
-                           formControlName="address"/>
-                </div>
-
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="blanatApp.dealUser.city" for="field_city">City</label>
-                    <input type="text" class="form-control" name="city" id="field_city"
-                           formControlName="city"/>
-                </div>
-
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="blanatApp.dealUser.birthDay" for="field_birthDay">Birth Day</label>
-                    <div class="input-group">
-                        <input id="field_birthDay" type="text" class="form-control" name="birthDay" ngbDatepicker #birthDayDp="ngbDatepicker" formControlName="birthDay"/>
-                        <span class="input-group-append">
-                            <button type="button" class="btn btn-secondary" (click)="birthDayDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
-                        </span>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="blanatApp.dealUser.comment" for="field_comment">Comment</label>
-                    <input type="checkbox" class="form-control" name="comment" id="field_comment"
-                           formControlName="comment"/>
-                </div>
-
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="blanatApp.dealUser.notification" for="field_notification">Notification</label>
-                    <input type="checkbox" class="form-control" name="notification" id="field_notification"
-                           formControlName="notification"/>
-                </div>
-
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="blanatApp.dealUser.reporting" for="field_reporting">Reporting</label>
-                    <input type="checkbox" class="form-control" name="reporting" id="field_reporting"
-                           formControlName="reporting"/>
-                </div>
-
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="blanatApp.dealUser.emailNotification" for="field_emailNotification">Email Notification</label>
-                    <input type="checkbox" class="form-control" name="emailNotification" id="field_emailNotification"
-                           formControlName="emailNotification"/>
-                </div>
-
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="blanatApp.dealUser.message" for="field_message">Message</label>
-                    <input type="checkbox" class="form-control" name="message" id="field_message"
-                           formControlName="message"/>
-                </div>
-
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="blanatApp.dealUser.user" for="field_user">User</label>
-                    <select class="form-control" id="field_user" name="user" formControlName="userId">
-                        <option *ngIf="!editForm.get('userId')!.value" [ngValue]="null" selected></option>
-                        <option [ngValue]="userOption.id" *ngFor="let userOption of users; trackBy: trackById">{{ userOption.id }}</option>
-                    </select>
-                </div>
-                <div *ngIf="editForm.get('userId')!.invalid && (editForm.get('userId')!.dirty || editForm.get('userId')!.touched)">
-                    <small class="form-text text-danger"
-                           *ngIf="editForm.get('userId')?.errors?.required" jhiTranslate="entity.validation.required">
-                        This field is required.
-                    </small>
-                </div>
-
-                <div class="form-group">
-                    <label jhiTranslate="blanatApp.dealUser.dealSaved" for="field_dealSaveds">Deal Saved</label>
-                    <select class="form-control" id="field_dealSaveds" multiple name="dealSaveds" formControlName="dealSaveds">
-                        <option [ngValue]="getSelected(editForm.get('dealSaveds')!.value, dealOption)" *ngFor="let dealOption of deals; trackBy: trackById">{{ dealOption.title }}</option>
-                    </select>
-                </div>
+        <div class="card">
+            <div class="card-header">
+                <h2 id="jhi-deal-user-heading" jhiTranslate="blanatApp.dealUser.home.createOrEditLabel">Create or edit a Deal User</h2>
             </div>
-
-            <div>
-                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
-                    <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
-                </button>
-
-                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
-                    <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
-                </button>
+            <div class="card-body">
+                <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+                    <div>
+                        <jhi-alert-error></jhi-alert-error>
+                        <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                            <label for="id" jhiTranslate="global.field.id">ID</label>
+                            <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                            <div class="form-group">
+                                <label class="form-control-label" jhiTranslate="userManagement.login">Login</label>
+                                <input type="text" class="form-control" name="login"
+                                       formControlName="login" placeholder="login">
+                            </div>
+                            <div *ngIf="editForm.get('login')!.invalid && (editForm.get('login')!.dirty || editForm.get('login')!.touched)">
+                                <small class="form-text text-danger"
+                                       *ngIf="editForm.get('login')?.errors?.required"
+                                       jhiTranslate="entity.validation.required">
+                                    This field is required.
+                                </small>
+        
+                                <small class="form-text text-danger"
+                                       *ngIf="editForm.get('login')?.errors?.maxlength"
+                                       jhiTranslate="entity.validation.maxlength"
+                                       [translateValues]="{ max: 50 }">
+                                    This field cannot be longer than 50 characters.
+                                </small>
+        
+                                <small class="form-text text-danger"
+                                       *ngIf="editForm.get('login')?.errors?.pattern"
+                                       jhiTranslate="entity.validation.patternLogin">
+                                    This field can only contain letters, digits and e-mail addresses.
+                                </small>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label class="form-control-label" jhiTranslate="userManagement.email">Email</label>
+                                <input type="email" class="form-control" name="email" placeholder="email" formControlName="email">
+            
+                                <div *ngIf="editForm.get('email')!.invalid && (editForm.get('email')!.dirty || editForm.get('email')!.touched)">
+                                    <small class="form-text text-danger"
+                                           *ngIf="editForm.get('email')?.errors?.required"
+                                           jhiTranslate="entity.validation.required">
+                                        This field is required.
+                                    </small>
+            
+                                    <small class="form-text text-danger"
+                                           *ngIf="editForm.get('email')?.errors?.maxlength"
+                                           jhiTranslate="entity.validation.maxlength"
+                                           [translateValues]="{ max: 100 }">
+                                        This field cannot be longer than 100 characters.
+                                    </small>
+            
+                                    <small class="form-text text-danger"
+                                           *ngIf="editForm.get('email')?.errors?.minlength"
+                                           jhiTranslate="entity.validation.minlength"
+                                           [translateValues]="{ min: 5 }">
+                                        This field is required to be at least 5 characters.
+                                    </small>
+            
+                                    <small class="form-text text-danger"
+                                           *ngIf="editForm.get('email')?.errors?.email"
+                                           jhiTranslate="global.messages.validate.email.invalid">
+                                        Your email is invalid.
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-2 my-auto">
+                            <div class="form-group my-auto">
+                                <div class="custom-control custom-switch">
+                                    <input type="checkbox" class="custom-control-input" id="activated" checked="" 
+                                    [attr.disabled]="user.id === undefined ? 'disabled' : null" formControlName="activated">
+                                    <label class="custom-control-label" for="activated" jhiTranslate="userManagement.activated">Activated</label>
+                                  </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label class="form-control-label" jhiTranslate="userManagement.firstName">First Name</label>
+                                <input type="text" class="form-control" name="firstName"
+                                       formControlName="firstName" placeholder="firstname">
+            
+                                <div *ngIf="editForm.get('firstName')!.invalid && (editForm.get('firstName')!.dirty || editForm.get('firstName')!.touched)">
+                                    <small class="form-text text-danger"
+                                           *ngIf="editForm.get('firstName')?.errors?.maxlength"
+                                           jhiTranslate="entity.validation.maxlength"
+                                           [translateValues]="{ max: 50 }">
+                                        This field cannot be longer than 50 characters.
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label jhiTranslate="userManagement.lastName">Last Name</label>
+                                <input type="text" class="form-control" name="lastName"
+                                       formControlName="lastName" placeholder="lastname">
+            
+                                <div *ngIf="editForm.get('lastName')!.invalid && (editForm.get('lastName')!.dirty || editForm.get('lastName')!.touched)">
+                                    <small class="form-text text-danger"
+                                           *ngIf="editForm.get('lastName')?.errors?.maxlength"
+                                           jhiTranslate="entity.validation.maxlength"
+                                           [translateValues]="{ max: 50 }">
+                                        This field cannot be longer than 50 characters.
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                            <div class="form-group">
+                                <label class="form-control-label" jhiTranslate="blanatApp.dealUser.gender" for="field_gender">Gender</label>
+                                <select class="form-control" name="gender" formControlName="gender" id="field_gender">
+                                    <option value="MALE">{{ 'blanatApp.Gender.MALE' | translate }}</option>
+                                    <option value="FEMALE">{{ 'blanatApp.Gender.FEMALE' | translate }}</option>
+                                </select>
+                                <div *ngIf="editForm.get('gender')!.invalid && (editForm.get('gender')!.dirty || editForm.get('gender')!.touched)">
+                                    <small class="form-text text-danger"
+                                           *ngIf="editForm.get('gender')?.errors?.required" jhiTranslate="entity.validation.required">
+                                    This field is required.
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-group">
+                                <label class="form-control-label" jhiTranslate="blanatApp.dealUser.birthDay" for="field_birthDay">Birth Day</label>
+                                <div class="input-group">
+                                    <input id="field_birthDay" type="text" class="form-control" name="birthDay" ngbDatepicker #birthDayDp="ngbDatepicker" formControlName="birthDay"/>
+                                    <span class="input-group-append">
+                                        <button type="button" class="btn btn-secondary" (click)="birthDayDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-group">
+                                <label class="form-control-label" jhiTranslate="blanatApp.dealUser.phone" for="field_phone">Phone</label>
+                                <input type="text" class="form-control" name="phone" id="field_phone"
+                                       formControlName="phone" placeholder="06 66 66 66 66"/>
+                                <div *ngIf="editForm.get('phone')!.invalid && (editForm.get('phone')!.dirty || editForm.get('phone')!.touched)">
+                                    <small class="form-text text-danger"
+                                           *ngIf="editForm.get('phone')?.errors?.pattern" jhiTranslate="entity.validation.pattern" [translateValues]="{ pattern: 'Phone' }">
+                                        This field should follow pattern for "Phone".
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-9">
+                            <div class="form-group">
+                                <label class="form-control-label" jhiTranslate="blanatApp.dealUser.address" for="field_address">Address</label>
+                                <input type="text" class="form-control" name="address" id="field_address"
+                                       formControlName="address"/>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="form-group">
+                                <label class="form-control-label" jhiTranslate="blanatApp.dealUser.city" for="field_city">City</label>
+                                <input type="text" class="form-control" name="city" id="field_city"
+                                       formControlName="city"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col float-right">
+                            <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                                <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                            </button>
+                            <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                                <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                            </button>
+                        </div>
+                    </div>
+                </form>
             </div>
-        </form>
+            <div>
+                
+            </div>
+        </div>
     </div>
+<div class="col-3">
+        <div class="card">
+            <div class="card-body">
+                <h3>Authorities</h3>
+                <div class="row justify-content-center">
+                    <div class="col my-auto">
+                        <div class="form-group my-auto">
+                            <div class="custom-control custom-switch">
+                                <input type="checkbox" class="custom-control-input" id="comment" checked="" 
+                                [attr.disabled]="user.id === undefined ? 'disabled' : null">
+                                <label class="custom-control-label" for="comment" jhiTranslate="blanatApp.dealUser.comment">Comment</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col my-auto">
+                        <div class="form-group my-auto">
+                            <div class="custom-control custom-switch">
+                                <input type="checkbox" class="custom-control-input" id="notification" checked="" 
+                                [attr.disabled]="user.id === undefined ? 'disabled' : null">
+                                <label class="custom-control-label" for="notification" jhiTranslate="blanatApp.dealUser.notification">Notification</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col my-auto">
+                        <div class="form-group my-auto">
+                            <div class="custom-control custom-switch">
+                                <input type="checkbox" class="custom-control-input" id="reporting" checked="" 
+                                [attr.disabled]="user.id === undefined ? 'disabled' : null">
+                                <label class="custom-control-label" for="reporting" jhiTranslate="blanatApp.dealUser.reporting">Reporting</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col my-auto">
+                        <div class="form-group my-auto">
+                            <div class="custom-control custom-switch">
+                                <input type="checkbox" class="custom-control-input" id="emailNotification" checked="" 
+                                [attr.disabled]="user.id === undefined ? 'disabled' : null" >
+                                <label class="custom-control-label" for="emailNotification" jhiTranslate="blanatApp.dealUser.emailNotification">Email Notification</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col my-auto">
+                        <div class="form-group my-auto">
+                            <div class="custom-control custom-switch">
+                                <input type="checkbox" class="custom-control-input" id="message" checked="" 
+                                [attr.disabled]="user.id === undefined ? 'disabled' : null">
+                                <label class="custom-control-label" for="message" jhiTranslate="blanatApp.dealUser.message">Message</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col my-auto">
+                        <div class="form-group">
+                            <label jhiTranslate="userManagement.profiles">Profiles</label>
+                            <select class="form-control" multiple name="authority" formControlName="authorities">
+                                <option *ngFor="let authority of authorities" [value]="authority">{{ authority }}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 </div>
