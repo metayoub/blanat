@@ -115,6 +115,7 @@ public class DealUserResource {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
         UserDTO userDTO = dealUserDTO.getUser();
+        userDTO.setId(dealUserDTO.getId());
         Optional<User> existingUser = userRepository.findOneByEmailIgnoreCase(userDTO.getEmail());
         if (existingUser.isPresent() && (!existingUser.get().getId().equals(userDTO.getId()))) {
             throw new EmailAlreadyUsedException();
