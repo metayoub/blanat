@@ -110,10 +110,20 @@ public class DealUserResource {
      */
     @PutMapping("/deal-users")
     public ResponseEntity<DealUserDTO> updateDealUser(@Valid @RequestBody DealUserDTO dealUserDTO) throws URISyntaxException {
-        log.debug("REST request to update DealUser : {}", dealUserDTO);
+        log.debug("REST request to update User : {}", dealUserDTO);
         if (dealUserDTO.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
+        UserDTO userDTO = dealUserDTO.getUser();
+        Optional<User> existingUser = userRepository.findOneByEmailIgnoreCase(userDTO.getEmail());
+        if (existingUser.isPresent() && (!existingUser.get().getId().equals(userDTO.getId()))) {
+            throw new EmailAlreadyUsedException();
+        }
+        existingUser = userRepository.findOneByLogin(userDTO.getLogin().toLowerCase());
+        if (existingUser.isPresent() && (!existingUser.get().getId().equals(userDTO.getId()))) {
+            throw new LoginAlreadyUsedException();
+        }
+        Optional<UserDTO> updatedUser = userService.updateUser(userDTO);
         DealUserDTO result = dealUserService.save(dealUserDTO);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, dealUserDTO.getId().toString()))
