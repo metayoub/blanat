@@ -1,8 +1,15 @@
 package com.aa.blanat.web.rest;
 
+import com.aa.blanat.domain.User;
+import com.aa.blanat.repository.UserRepository;
 import com.aa.blanat.service.DealUserService;
+import com.aa.blanat.service.MailService;
+import com.aa.blanat.service.UserService;
 import com.aa.blanat.web.rest.errors.BadRequestAlertException;
+import com.aa.blanat.web.rest.errors.LoginAlreadyUsedException;
+import com.aa.blanat.web.rest.errors.EmailAlreadyUsedException;
 import com.aa.blanat.service.dto.DealUserDTO;
+import com.aa.blanat.service.dto.UserDTO;
 
 import io.github.jhipster.web.util.HeaderUtil;
 import io.github.jhipster.web.util.PaginationUtil;
@@ -38,11 +45,21 @@ public class DealUserResource {
 
     @Value("${jhipster.clientApp.name}")
     private String applicationName;
+    
+    private final UserService userService;
+
+    private final UserRepository userRepository;
+
+    private final MailService mailService;
 
     private final DealUserService dealUserService;
 
-    public DealUserResource(DealUserService dealUserService) {
+    public DealUserResource(DealUserService dealUserService, UserService userService, UserRepository userRepository,
+            MailService mailService) {
         this.dealUserService = dealUserService;
+        this.userService = userService;
+        this.userRepository = userRepository;
+        this.mailService = mailService;
     }
 
     /**
@@ -54,17 +71,32 @@ public class DealUserResource {
      */
     @PostMapping("/deal-users")
     public ResponseEntity<DealUserDTO> createDealUser(@Valid @RequestBody DealUserDTO dealUserDTO) throws URISyntaxException {
-        log.debug("REST request to save DealUser : {}", dealUserDTO);
-        if (dealUserDTO.getId() != null) {
+        UserDTO userDTO = dealUserDTO.getUser();
+        log.debug("REST request to save User : {}", dealUserDTO);
+        if (userDTO.getId() != null && dealUserDTO.getId() != null) {
+            throw new BadRequestAlertException("A new user (or dealUser) cannot already have an ID", ENTITY_NAME, "idexists");
+            // Lowercase the user login before comparing with database
+        } else if (userRepository.findOneByLogin(userDTO.getLogin().toLowerCase()).isPresent()) {
+            throw new LoginAlreadyUsedException();
+        } else if (userRepository.findOneByEmailIgnoreCase(userDTO.getEmail()).isPresent()) {
+            throw new EmailAlreadyUsedException();
+        } else {
+            User newUser = userService.createUser(userDTO);
+            mailService.sendCreationEmail(newUser);
+            dealUserDTO.setUserId(newUser.getId());
+            log.debug("REST request to save DealUser : {}", dealUserDTO);
+            if (Objects.isNull(dealUserDTO.getUserId())) {
+                throw new BadRequestAlertException("Invalid association value provided", ENTITY_NAME, "null");
+            }
+            DealUserDTO result = dealUserService.save(dealUserDTO);
+            return ResponseEntity
+                    .created(new URI("/api/deal-users/" + result.getId())).headers(HeaderUtil
+                            .createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
+                    .body(result);
+        }
+        /*if (dealUserDTO.getId() != null) {
             throw new BadRequestAlertException("A new dealUser cannot already have an ID", ENTITY_NAME, "idexists");
-        }
-        if (Objects.isNull(dealUserDTO.getUserId())) {
-            throw new BadRequestAlertException("Invalid association value provided", ENTITY_NAME, "null");
-        }
-        DealUserDTO result = dealUserService.save(dealUserDTO);
-        return ResponseEntity.created(new URI("/api/deal-users/" + result.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
-            .body(result);
+        }*/
     }
 
     /**

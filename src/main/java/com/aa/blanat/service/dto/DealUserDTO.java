@@ -36,6 +36,7 @@ public class DealUserDTO implements Serializable {
 
     private Boolean message;
 
+    private UserDTO user;
 
     private Long userId;
     private Set<DealDTO> dealSaveds = new HashSet<>();
@@ -180,4 +181,14 @@ public class DealUserDTO implements Serializable {
             ", dealSaveds='" + getDealSaveds() + "'" +
             "}";
     }
+
+    public UserDTO getUser() {
+        return user;
+    }
+
+    public void setUser(UserDTO user) {
+        this.user = user;
+    }
+
+
 }
