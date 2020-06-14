@@ -161,8 +161,8 @@
                         <div class="col my-auto">
                             <div class="form-group">
                                 <label jhiTranslate="userManagement.profiles">Profiles</label>
-                                <select class="form-control" multiple name="authority" formControlName="authorities" readonlyx>
-                                    <option *ngFor="let authority of editForm.get('authorities')!.value" [value]="authority">{{ authority }}</option>
+                                <select class="form-control" multiple name="authority" formControlName="authorities" [attr.disabled]="disabled ? 'disabled' : null">
+                                    <option *ngFor="let authority of editForm.get('authorities')!.value">{{ authority }}</option>
                                 </select>
                             </div>
                         </div>
