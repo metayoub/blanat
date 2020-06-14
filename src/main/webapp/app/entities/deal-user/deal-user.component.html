@@ -39,7 +39,7 @@
                         <td>{{ dealUser.user?.lastName || '' | uppercase }} {{ dealUser.user?.firstName || '' | titlecase  }}</td>
                         <td>{{ dealUser.user?.login }}</td>
                         <td>{{ dealUser.user?.email }}</td>
-                        <td></td>
+                        <td>{{ dealUser.deals }}</td>
                         <td><button type="button" class="btn"
                             [ngClass]="dealUser.user?.activated? 'btn-outline-success':'btn-outline-danger'" >{{ dealUser.user?.activated }}</button></td>
                         <td>

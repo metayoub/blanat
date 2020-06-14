@@ -16,6 +16,7 @@ export interface IDealUser {
   emailNotification?: boolean;
   message?: boolean;
   userId?: number;
+  deals?: number;
   dealSaveds?: IDeal[];
   user?: IUser;
 }
@@ -34,6 +35,7 @@ export class DealUser implements IDealUser {
     public emailNotification?: boolean,
     public message?: boolean,
     public userId?: number,
+    public deals?: number,
     public dealSaveds?: IDeal[],
     public user?: IUser,
   ) {
