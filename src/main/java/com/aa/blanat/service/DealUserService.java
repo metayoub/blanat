@@ -3,6 +3,7 @@ package com.aa.blanat.service;
 import com.aa.blanat.domain.DealUser;
 import com.aa.blanat.repository.DealUserRepository;
 import com.aa.blanat.repository.UserRepository;
+import com.aa.blanat.repository.DealRepository;
 import com.aa.blanat.service.dto.DealUserDTO;
 import com.aa.blanat.service.mapper.DealUserMapper;
 import org.slf4j.Logger;
@@ -30,10 +31,14 @@ public class DealUserService {
 
     private final UserRepository userRepository;
 
-    public DealUserService(DealUserRepository dealUserRepository, DealUserMapper dealUserMapper, UserRepository userRepository) {
+    private final DealRepository dealRepository;
+
+    public DealUserService(DealUserRepository dealUserRepository, DealUserMapper dealUserMapper,
+    DealRepository dealRepository, UserRepository userRepository) {
         this.dealUserRepository = dealUserRepository;
         this.dealUserMapper = dealUserMapper;
         this.userRepository = userRepository;
+        this.dealRepository = dealRepository;
     }
 
     /**
@@ -61,7 +66,11 @@ public class DealUserService {
     public Page<DealUserDTO> findAll(Pageable pageable) {
         log.debug("Request to get all DealUsers");
         return dealUserRepository.findAll(pageable)
-            .map(dealUserMapper::toDto);
+            .map((dealUser) -> {
+                DealUserDTO dealUserDto = dealUserMapper.toDto(dealUser);
+                dealUserDto.setDeals(dealRepository.findByAssignedTo(dealUser).size());
+                return dealUserDto;
+            });
     }
 
 
@@ -71,7 +80,12 @@ public class DealUserService {
      * @return the list of entities.
      */
     public Page<DealUserDTO> findAllWithEagerRelationships(Pageable pageable) {
-        return dealUserRepository.findAllWithEagerRelationships(pageable).map(dealUserMapper::toDto);
+        return dealUserRepository.findAllWithEagerRelationships(pageable).map(
+            (deal) -> {
+                log.debug("test 2 ....");
+                return dealUserMapper.toDto(deal);
+            }
+        );
     }
 
     /**

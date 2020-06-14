@@ -40,6 +40,8 @@ public class DealUserDTO implements Serializable {
 
     private Long userId;
     private Set<DealDTO> dealSaveds = new HashSet<>();
+
+    private int deals;
     
     public Long getId() {
         return id;
@@ -190,5 +192,12 @@ public class DealUserDTO implements Serializable {
         this.user = user;
     }
 
+    public int getDeals() {
+        return deals;
+    }
+
+    public void setDeals(int deals) {
+        this.deals = deals;
+    }
 
 }
