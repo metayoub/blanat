@@ -1,6 +1,7 @@
 import { Moment } from 'moment';
 import { IDeal } from 'app/shared/model/deal.model';
 import { Gender } from 'app/shared/model/enumerations/gender.model';
+import { IUser } from 'app/core/user/user.model';
 
 export interface IDealUser {
   id?: number;
@@ -16,6 +17,7 @@ export interface IDealUser {
   message?: boolean;
   userId?: number;
   dealSaveds?: IDeal[];
+  user?: IUser;
 }
 
 export class DealUser implements IDealUser {
@@ -32,7 +34,8 @@ export class DealUser implements IDealUser {
     public emailNotification?: boolean,
     public message?: boolean,
     public userId?: number,
-    public dealSaveds?: IDeal[]
+    public dealSaveds?: IDeal[],
+    public user?: IUser,
   ) {
     this.comment = this.comment || false;
     this.notification = this.notification || false;

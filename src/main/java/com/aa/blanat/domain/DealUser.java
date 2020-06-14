@@ -31,7 +31,7 @@ public class DealUser implements Serializable {
     @Column(name = "gender", nullable = false)
     private Gender gender;
 
-    @Pattern(regexp = "^(?:0|\\(?\\+212\\)?\\s?|00212\\s?)[1-79](?:[\\.\\-\\s]?\\d\\d)")
+    @Pattern(regexp = "^(?:0|\\(?\\+212\\)?\\s?|00212\\s?)[1-79](?:[\\.\\-\\s]?\\d\\d){4}$")
     @Column(name = "phone")
     private String phone;
 

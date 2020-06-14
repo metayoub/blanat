@@ -20,10 +20,8 @@ type SelectableEntity = IUser | IDeal;
 })
 export class DealUserUpdateComponent implements OnInit {
   isSaving = false;
-  users: IUser[] = [];
   deals: IDeal[] = [];
   birthDayDp: any;
-  user: any = {}; // a supprimer
   authorities: string[] = [];
 
   editForm = this.fb.group({
@@ -42,7 +40,7 @@ export class DealUserUpdateComponent implements OnInit {
     email: ['', [Validators.minLength(5), Validators.maxLength(254), Validators.email]],
     activated: [],
     gender: [null, [Validators.required]],
-    phone: [null, [Validators.pattern('^(?:0|\\(?\\+212\\)?\\s?|00212\\s?)[1-79](?:[\\.\\-\\s]?\\d\\d)')]],
+    phone: [null, [Validators.pattern('^(?:0|\\(?\\+212\\)?\\s?|00212\\s?)[1-79](?:[\\.\\-\\s]?\\d\\d){4}$')]],
     address: [],
     city: [],
     birthDay: [],
@@ -51,7 +49,7 @@ export class DealUserUpdateComponent implements OnInit {
     reporting: [],
     emailNotification: [],
     message: [],
-    userId: [null, Validators.required],
+    userId: [null],
     dealSaveds: [],
     authorities: [],
   });
@@ -68,7 +66,9 @@ export class DealUserUpdateComponent implements OnInit {
     this.activatedRoute.data.subscribe(({ dealUser }) => {
       this.updateForm(dealUser);
 
-      this.userService.query().subscribe((res: HttpResponse<IUser[]>) => (this.users = res.body || []));
+      this.userService.authorities().subscribe(authorities => {
+        this.authorities = authorities;
+      });
 
       this.dealService.query().subscribe((res: HttpResponse<IDeal[]>) => (this.deals = res.body || []));
     });
@@ -89,6 +89,12 @@ export class DealUserUpdateComponent implements OnInit {
       message: dealUser.message,
       userId: dealUser.userId,
       dealSaveds: dealUser.dealSaveds,
+      login: dealUser.user?.login,
+      firstName: dealUser.user?.firstName,
+      lastName: dealUser.user?.lastName,
+      email: dealUser.user?.email,
+      activated: dealUser.user?.activated,
+      authorities: dealUser.user?.authorities,
     });
   }
 
@@ -122,6 +128,15 @@ export class DealUserUpdateComponent implements OnInit {
       message: this.editForm.get(['message'])!.value,
       userId: this.editForm.get(['userId'])!.value,
       dealSaveds: this.editForm.get(['dealSaveds'])!.value,
+      user: {
+        id: this.editForm.get(['id'])!.value,
+        login: this.editForm.get(['login'])!.value,
+        firstName: this.editForm.get(['firstName'])!.value,
+        lastName: this.editForm.get(['lastName'])!.value,
+        email: this.editForm.get(['email'])!.value,
+        activated: this.editForm.get(['activated'])!.value,
+        authorities: this.editForm.get(['authorities'])!.value,
+      },
     };
   }
 
