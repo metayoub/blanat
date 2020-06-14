@@ -43,11 +43,11 @@
                         <td><button type="button" class="btn"
                             [ngClass]="dealUser.user?.activated? 'btn-outline-success':'btn-outline-danger'" >{{ dealUser.user?.activated }}</button></td>
                         <td>
-                            <fa-icon [hidden]="!dealUser.comment" icon="comment"></fa-icon>
-                            <fa-icon [hidden]="!dealUser.notification" icon="bell"></fa-icon>
-                            <fa-icon [hidden]="!dealUser.reporting" icon="flag"></fa-icon>
-                            <fa-icon [hidden]="!dealUser.emailNotification" icon="envelope"></fa-icon>
-                            <fa-icon [hidden]="!dealUser.message" icon="reply"></fa-icon>
+                            <fa-icon [hidden]="!dealUser.comment" icon="comment" data-toggle="tooltip" data-placement="bottom" title="Comment"></fa-icon>
+                            <fa-icon [hidden]="!dealUser.notification" icon="bell" data-toggle="tooltip" data-placement="bottom" title="Notification"></fa-icon>
+                            <fa-icon [hidden]="!dealUser.reporting" icon="flag" data-toggle="tooltip" data-placement="bottom" title="Report"></fa-icon>
+                            <fa-icon [hidden]="!dealUser.emailNotification" icon="envelope" data-toggle="tooltip" data-placement="bottom" title="Email notification"></fa-icon>
+                            <fa-icon [hidden]="!dealUser.message" icon="reply" data-toggle="tooltip" data-placement="bottom" title="Message"></fa-icon>
                         </td>
                         <td class="text-right">
                             <div class="btn-group">
