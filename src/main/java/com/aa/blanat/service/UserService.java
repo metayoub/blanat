@@ -212,6 +212,13 @@ public class UserService {
         });
     }
 
+    public void deleteByStatus(Long id){
+        Optional<User> userDelete = userRepository.findById(id);
+        User _userDelete = userDelete.get();
+        _userDelete.setActivated(false);
+        userRepository.save(_userDelete);
+    }
+
     /**
      * Update basic information (first name, last name, email, language) for the current user.
      *

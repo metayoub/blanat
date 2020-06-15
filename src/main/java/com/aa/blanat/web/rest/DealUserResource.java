@@ -174,7 +174,8 @@ public class DealUserResource {
     public ResponseEntity<Void> deleteDealUser(@PathVariable Long id) {
         log.debug("REST request to delete DealUser : {}", id);
 
-        dealUserService.delete(id);
+        userService.deleteByStatus(id);
+        dealUserService.deleteByStatus(id);
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
     }
 }

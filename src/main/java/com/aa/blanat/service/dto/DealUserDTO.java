@@ -36,6 +36,8 @@ public class DealUserDTO implements Serializable {
 
     private Boolean message;
 
+    private Boolean deleted = false;    
+
     private UserDTO user;
 
     private Long userId;
@@ -198,6 +200,14 @@ public class DealUserDTO implements Serializable {
 
     public void setDeals(int deals) {
         this.deals = deals;
+    }
+
+    public Boolean isDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(Boolean deleted) {
+        this.deleted = deleted;
     }
 
 }

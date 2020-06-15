@@ -111,4 +111,12 @@ public class DealUserService {
 
         dealUserRepository.deleteById(id);
     }
+
+    public void deleteByStatus(Long id) {
+        //log.debug("Request to delete DealUser : {}", id);
+        Optional<DealUser> dealUserDelete = dealUserRepository.findById(id);
+        DealUser _dealUserDelete = dealUserDelete.get();
+        _dealUserDelete.setDeleted(true);
+        dealUserRepository.save(_dealUserDelete);
+    }
 }

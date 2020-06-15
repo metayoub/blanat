@@ -59,6 +59,9 @@ public class DealUser implements Serializable {
     @Column(name = "message")
     private Boolean message;
 
+    @Column(name = "deleted")
+    private Boolean deleted = false;
+
     @OneToOne(optional = false)
     @NotNull
 
@@ -283,5 +286,14 @@ public class DealUser implements Serializable {
             ", emailNotification='" + isEmailNotification() + "'" +
             ", message='" + isMessage() + "'" +
             "}";
+    }
+
+    public Boolean isDeleted() {
+        return deleted;
+    }
+
+    public DealUser setDeleted(Boolean deleted) {
+        this.deleted = deleted;
+        return this;
     }
 }
