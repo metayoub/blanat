@@ -80,12 +80,12 @@ public class DealUserService {
      * @return the list of entities.
      */
     public Page<DealUserDTO> findAllWithEagerRelationships(Pageable pageable) {
-        return dealUserRepository.findAllWithEagerRelationships(pageable).map(
-            (deal) -> {
-                log.debug("test 2 ....");
-                return dealUserMapper.toDto(deal);
-            }
-        );
+        return dealUserRepository.findAllWithEagerRelationships(pageable)
+        .map((dealUser) -> {
+            DealUserDTO dealUserDto = dealUserMapper.toDto(dealUser);
+            dealUserDto.setDeals(dealRepository.findByAssignedTo(dealUser).size());
+            return dealUserDto;
+        });
     }
 
     /**
