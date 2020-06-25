@@ -15,6 +15,7 @@ export interface IDealUser {
   reporting?: boolean;
   emailNotification?: boolean;
   message?: boolean;
+  deleted?: boolean;
   userId?: number;
   deals?: number;
   dealSaveds?: IDeal[];
@@ -34,15 +35,17 @@ export class DealUser implements IDealUser {
     public reporting?: boolean,
     public emailNotification?: boolean,
     public message?: boolean,
+    public deleted?: boolean,
     public userId?: number,
     public deals?: number,
     public dealSaveds?: IDeal[],
-    public user?: IUser,
+    public user?: IUser
   ) {
     this.comment = this.comment || false;
     this.notification = this.notification || false;
     this.reporting = this.reporting || false;
     this.emailNotification = this.emailNotification || false;
     this.message = this.message || false;
+    this.deleted = this.deleted || false;
   }
 }
