@@ -57,30 +57,18 @@
                                     <fa-icon icon="eye"></fa-icon>
                                 </button>
 
-                                <button type="submit" 
-                                        *ngIf="!dealUser.deleted"
-                                        [routerLink]="['/deal-user', dealUser.id, 'edit']"
-                                        class="btn btn-primary btn-sm">
-                                    <fa-icon icon="pencil-alt"></fa-icon>
-                                </button>
-
-                                <button type="submit" [disabled]="dealUser.deleted" 
-                                        *ngIf="dealUser.deleted"
+                                <button type="submit" [disabled]="dealUser?.deleted"
+                                        (click)="edit(dealUser)"
                                         class="btn btn-primary btn-sm">
                                     <fa-icon icon="pencil-alt"></fa-icon>
                                 </button>
     
-                                <button *ngIf="!dealUser.deleted"
+                                <button [disabled]="dealUser?.deleted"
                                         type="submit" (click)="delete(dealUser)"
                                         class="btn btn-danger btn-sm">
                                     <fa-icon icon="times"></fa-icon>
                                 </button>
 
-                                <button *ngIf="dealUser.deleted"
-                                        [disabled]="dealUser.deleted" type="submit" 
-                                        class="btn btn-danger btn-sm">
-                                    <fa-icon icon="times"></fa-icon>
-                                </button>
                             </div>
                         </td>
                     </tr>

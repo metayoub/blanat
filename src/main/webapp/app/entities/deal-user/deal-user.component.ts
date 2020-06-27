@@ -94,8 +94,15 @@ export class DealUserComponent implements OnInit, OnDestroy {
   }
 
   delete(dealUser: IDealUser): void {
-    const modalRef = this.modalService.open(DealUserDeleteDialogComponent, { size: 'lg', backdrop: 'static' });
-    modalRef.componentInstance.dealUser = dealUser;
+    if (!dealUser?.deleted) {
+      const modalRef = this.modalService.open(DealUserDeleteDialogComponent, { size: 'lg', backdrop: 'static' });
+      modalRef.componentInstance.dealUser = dealUser;
+    }
+  }
+  edit(dealUser: IDealUser): void {
+    if (!dealUser?.deleted) {
+      this.router.navigate(['/deal-user', dealUser.id, 'edit']);
+    }
   }
 
   sort(): string[] {
