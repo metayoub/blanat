@@ -41,7 +41,7 @@
                         <td>{{ dealUser.user?.email }}</td>
                         <td>{{ dealUser.deals }}</td>
                         <td><button type="button" class="btn"
-                            [ngClass]="dealUser.user?.activated? 'btn-outline-success':'btn-outline-danger'" >{{ dealUser.user?.activated }}</button></td>
+                            [ngClass]="dealUser.user?.activated? 'btn-outline-success':dealUser.deleted? 'btn-outline-secondary':'btn-outline-danger'" >{{ dealUser.user?.activated }}</button></td>
                         <td>
                             <fa-icon [hidden]="!dealUser.comment" icon="comment" data-toggle="tooltip" data-placement="bottom" title="Comment"></fa-icon>
                             <fa-icon [hidden]="!dealUser.notification" icon="bell" data-toggle="tooltip" data-placement="bottom" title="Notification"></fa-icon>
