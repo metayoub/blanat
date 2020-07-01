@@ -109,6 +109,12 @@ public class ExceptionTranslator implements ProblemHandling, SecurityAdviceTrait
     }
 
     @ExceptionHandler
+    public ResponseEntity<Problem> handleDealUserDeletedException(com.aa.blanat.service.DealUserDeletedException ex,
+            NativeWebRequest request) {
+        return create(new DealUserDeletedException(), request);
+    }
+
+    @ExceptionHandler
     public ResponseEntity<Problem> handleBadRequestAlertException(BadRequestAlertException ex, NativeWebRequest request) {
         return create(ex, request, HeaderUtil.createFailureAlert(applicationName, true, ex.getEntityName(), ex.getErrorKey(), ex.getMessage()));
     }
