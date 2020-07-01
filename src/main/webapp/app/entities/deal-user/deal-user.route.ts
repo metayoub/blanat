@@ -23,7 +23,7 @@ export class DealUserResolve implements Resolve<IDealUser> {
       return this.service.find(id).pipe(
         flatMap((dealUser: HttpResponse<DealUser>) => {
           if (dealUser.body) {
-            if(dealUser.body?.deleted) {
+            if((dealUser.body?.deleted) && (route.url[1].path==="edit")) {
               this.router.navigate(['/deal-user']);
               return EMPTY;
             } 
