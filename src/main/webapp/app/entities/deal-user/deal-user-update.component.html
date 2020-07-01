@@ -138,7 +138,7 @@
                         <div class="form-group">
                             <label class="form-control-label" jhiTranslate="blanatApp.dealUser.birthDay" for="field_birthDay">Birth Day</label>
                             <div class="input-group">
-                                <input id="field_birthDay" type="text" class="form-control" name="birthDay" ngbDatepicker #birthDayDp="ngbDatepicker" formControlName="birthDay" placeholder="DD-MM-YYYY"/>
+                                <input id="field_birthDay" type="text" class="form-control" name="birthDay" ngbDatepicker #birthDayDp="ngbDatepicker" [startDate]="{year: 2000, month: 1}" formControlName="birthDay" placeholder="DD-MM-YYYY"/>
                                 <span class="input-group-append">
                                     <button type="button" class="btn btn-secondary" (click)="birthDayDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
                                 </span>
