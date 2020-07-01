@@ -6,6 +6,7 @@ import com.aa.blanat.service.DealUserService;
 import com.aa.blanat.service.MailService;
 import com.aa.blanat.service.UserService;
 import com.aa.blanat.web.rest.errors.BadRequestAlertException;
+import com.aa.blanat.web.rest.errors.DealUserDeletedException;
 import com.aa.blanat.web.rest.errors.LoginAlreadyUsedException;
 import com.aa.blanat.web.rest.errors.EmailAlreadyUsedException;
 import com.aa.blanat.service.dto.DealUserDTO;
@@ -117,6 +118,9 @@ public class DealUserResource {
         UserDTO userDTO = dealUserDTO.getUser();
         userDTO.setId(dealUserDTO.getId());
         Optional<User> existingUser = userRepository.findOneByEmailIgnoreCase(userDTO.getEmail());
+        if (dealUserService.findOne(dealUserDTO.getId()).get().isDeleted()) {
+            throw new DealUserDeletedException();
+        }
         if (existingUser.isPresent() && (!existingUser.get().getId().equals(userDTO.getId()))) {
             throw new EmailAlreadyUsedException();
         }
