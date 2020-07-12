@@ -47,8 +47,8 @@ public class DealUserResourceIT {
     private static final Gender DEFAULT_GENDER = Gender.MALE;
     private static final Gender UPDATED_GENDER = Gender.FEMALE;
 
-    private static final String DEFAULT_PHONE = "00212654";
-    private static final String UPDATED_PHONE = "0435";
+    private static final String DEFAULT_PHONE = "0611092455";
+    private static final String UPDATED_PHONE = "0622554488";
 
     private static final String DEFAULT_ADDRESS = "AAAAAAAAAA";
     private static final String UPDATED_ADDRESS = "BBBBBBBBBB";
