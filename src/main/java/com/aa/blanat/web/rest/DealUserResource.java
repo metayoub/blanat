@@ -74,7 +74,7 @@ public class DealUserResource {
     public ResponseEntity<DealUserDTO> createDealUser(@Valid @RequestBody DealUserDTO dealUserDTO) throws URISyntaxException {
         UserDTO userDTO = dealUserDTO.getUser();
         log.debug("REST request to save User : {}", dealUserDTO);
-        if (userDTO.getId() != null && dealUserDTO.getId() != null) {
+        if (userDTO.getId() != null || dealUserDTO.getId() != null) {
             throw new BadRequestAlertException("A new user (or dealUser) cannot already have an ID", ENTITY_NAME, "idexists");
             // Lowercase the user login before comparing with database
         } else if (userRepository.findOneByLogin(userDTO.getLogin().toLowerCase()).isPresent()) {

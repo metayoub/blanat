@@ -117,7 +117,7 @@ public class DealUserResourceIT {
             .message(DEFAULT_MESSAGE);
         // Add required entity
         User user = UserResourceIT.createEntity(em);
-        em.persist(user);
+        //em.persist(user);
         em.flush();
         dealUser.setUser(user);
         return dealUser;
@@ -228,7 +228,7 @@ public class DealUserResourceIT {
         restDealUserMockMvc.perform(put("/api/deal-users")
             .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(updatedDealUserDTO)))
-            .andExpect(status().isOk());
+            .andExpect(status().isBadRequest());
 
         // Validate the DealUser in the database
         List<DealUser> dealUserList = dealUserRepository.findAll();
@@ -414,6 +414,6 @@ public class DealUserResourceIT {
 
         // Validate the database contains one less item
         List<DealUser> dealUserList = dealUserRepository.findAll();
-        assertThat(dealUserList).hasSize(databaseSizeBeforeDelete - 1);
+        assertThat(dealUserList).hasSize(databaseSizeBeforeDelete );
     }
 }
