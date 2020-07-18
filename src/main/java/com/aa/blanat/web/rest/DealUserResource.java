@@ -1,7 +1,9 @@
 package com.aa.blanat.web.rest;
 
+import com.aa.blanat.domain.Authority;
 import com.aa.blanat.domain.User;
 import com.aa.blanat.repository.UserRepository;
+import com.aa.blanat.security.AuthoritiesConstants;
 import com.aa.blanat.service.DealUserService;
 import com.aa.blanat.service.MailService;
 import com.aa.blanat.service.UserService;
@@ -29,6 +31,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -82,6 +85,11 @@ public class DealUserResource {
         } else if (userRepository.findOneByEmailIgnoreCase(userDTO.getEmail()).isPresent()) {
             throw new EmailAlreadyUsedException();
         } else {
+            if (userDTO.getAuthorities() == null){
+                HashSet<String> lstAuthorities = new HashSet<String>();
+                lstAuthorities.add(AuthoritiesConstants.USER);
+                userDTO.setAuthorities(lstAuthorities);             
+            }
             User newUser = userService.createUser(userDTO);
             mailService.sendCreationEmail(newUser);
             dealUserDTO.setUserId(newUser.getId());
