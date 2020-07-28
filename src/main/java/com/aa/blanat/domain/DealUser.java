@@ -31,7 +31,7 @@ public class DealUser implements Serializable {
     @Column(name = "gender", nullable = false)
     private Gender gender;
 
-    @Pattern(regexp = "^(?:0|\\(?\\+212\\)?\\s?|00212\\s?)[1-79](?:[\\.\\-\\s]?\\d\\d)")
+    @Pattern(regexp = "^(?:0|\\(?\\+212\\)?\\s?|00212\\s?)[1-79](?:[\\.\\-\\s]?\\d\\d){4}$")
     @Column(name = "phone")
     private String phone;
 
@@ -58,6 +58,9 @@ public class DealUser implements Serializable {
 
     @Column(name = "message")
     private Boolean message;
+
+    @Column(name = "deleted")
+    private Boolean deleted = false;
 
     @OneToOne(optional = false)
     @NotNull
@@ -283,5 +286,14 @@ public class DealUser implements Serializable {
             ", emailNotification='" + isEmailNotification() + "'" +
             ", message='" + isMessage() + "'" +
             "}";
+    }
+
+    public Boolean isDeleted() {
+        return deleted;
+    }
+
+    public DealUser setDeleted(Boolean deleted) {
+        this.deleted = deleted;
+        return this;
     }
 }
