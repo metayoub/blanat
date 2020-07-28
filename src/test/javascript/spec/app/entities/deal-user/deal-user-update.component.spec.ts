@@ -51,7 +51,6 @@ describe('Component Tests', () => {
         // WHEN
         comp.save();
         tick(); // simulate async
-
         // THEN
         // expect(service.create).toHaveBeenCalledWith(entity);
         expect(comp.isSaving).toEqual(false);
