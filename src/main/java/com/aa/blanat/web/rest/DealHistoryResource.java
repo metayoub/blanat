@@ -120,7 +120,6 @@ public class DealHistoryResource {
     @DeleteMapping("/deal-histories/{id}")
     public ResponseEntity<Void> deleteDealHistory(@PathVariable Long id) {
         log.debug("REST request to delete DealHistory : {}", id);
-
         dealHistoryService.delete(id);
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
     }

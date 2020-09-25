@@ -12,7 +12,6 @@ import com.aa.blanat.service.dto.UserDTO;
 import com.aa.blanat.web.rest.vm.KeyAndPasswordVM;
 import com.aa.blanat.web.rest.vm.ManagedUserVM;
 import org.apache.commons.lang3.RandomStringUtils;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

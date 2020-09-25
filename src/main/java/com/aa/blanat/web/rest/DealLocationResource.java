@@ -111,7 +111,6 @@ public class DealLocationResource {
     @DeleteMapping("/deal-locations/{id}")
     public ResponseEntity<Void> deleteDealLocation(@PathVariable Long id) {
         log.debug("REST request to delete DealLocation : {}", id);
-
         dealLocationService.delete(id);
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
     }

@@ -80,7 +80,6 @@ public class DealLocationService {
      */
     public void delete(Long id) {
         log.debug("Request to delete DealLocation : {}", id);
-
         dealLocationRepository.deleteById(id);
     }
 }
