@@ -46,9 +46,6 @@
             <column name="message" type="boolean">
                 <constraints nullable="true" />
             </column>
-            <column name="deleted" type="boolean">
-                <constraints nullable="true" />
-            </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
         </createTable>
     </changeSet>
@@ -93,7 +90,6 @@
             <column name="reporting" type="boolean"/>
             <column name="email_notification" type="boolean"/>
             <column name="message" type="boolean"/>
-            <column name="deleted" type="boolean" />
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
         </loadData>
     </changeSet>

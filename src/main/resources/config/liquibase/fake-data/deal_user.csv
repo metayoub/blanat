@@ -1,5 +1,5 @@
-id;gender;phone;address;city;birth_day;comment;notification;reporting;email_notification;message;deleted
-1;MALE;"05-44";navigating;South Nadiabury;2020-06-09;true;false;true;false;false;false
-2;MALE;"0376";bluetooth HTTP Savings Account;Caspermouth;2020-06-08;true;false;false;false;false;false
-3;MALE;"(+212 3.30";Berkshire clicks-and-mortar Rand Loti;Lewismouth;2020-06-08;false;false;false;true;false;false
-4;MALE;"+212 3.51";relationships Devolved;West Eva;2020-06-08;false;false;true;true;false;false
+id;gender;phone;address;city;birth_day;comment;notification;reporting;email_notification;message
+1;MALE;"05-44";navigating;South Nadiabury;2020-06-09;true;false;true;false;false
+2;MALE;"0376";bluetooth HTTP Savings Account;Caspermouth;2020-06-08;true;false;false;false;false
+3;MALE;"(+212 3.30";Berkshire clicks-and-mortar Rand Loti;Lewismouth;2020-06-08;false;false;false;true;false
+4;MALE;"+212 3.51";relationships Devolved;West Eva;2020-06-08;false;false;true;true;false

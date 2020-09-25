@@ -1,7 +1,6 @@
 package com.aa.blanat.repository;
 
 import com.aa.blanat.domain.Deal;
-import com.aa.blanat.domain.DealUser;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -27,6 +26,4 @@ public interface DealRepository extends JpaRepository<Deal, Long> {
 
     @Query("select deal from Deal deal left join fetch deal.dealCategories where deal.id =:id")
     Optional<Deal> findOneWithEagerRelationships(@Param("id") Long id);
-
-    List<Deal> findByAssignedTo(DealUser assignedTo);
 }

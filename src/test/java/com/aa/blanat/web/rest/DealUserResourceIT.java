@@ -47,8 +47,8 @@ public class DealUserResourceIT {
     private static final Gender DEFAULT_GENDER = Gender.MALE;
     private static final Gender UPDATED_GENDER = Gender.FEMALE;
 
-    private static final String DEFAULT_PHONE = "0611092455";
-    private static final String UPDATED_PHONE = "0622554488";
+    private static final String DEFAULT_PHONE = "00212654";
+    private static final String UPDATED_PHONE = "0435";
 
     private static final String DEFAULT_ADDRESS = "AAAAAAAAAA";
     private static final String UPDATED_ADDRESS = "BBBBBBBBBB";
@@ -117,7 +117,7 @@ public class DealUserResourceIT {
             .message(DEFAULT_MESSAGE);
         // Add required entity
         User user = UserResourceIT.createEntity(em);
-        //em.persist(user);
+        em.persist(user);
         em.flush();
         dealUser.setUser(user);
         return dealUser;
@@ -228,7 +228,7 @@ public class DealUserResourceIT {
         restDealUserMockMvc.perform(put("/api/deal-users")
             .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(updatedDealUserDTO)))
-            .andExpect(status().isBadRequest());
+            .andExpect(status().isOk());
 
         // Validate the DealUser in the database
         List<DealUser> dealUserList = dealUserRepository.findAll();
@@ -414,6 +414,6 @@ public class DealUserResourceIT {
 
         // Validate the database contains one less item
         List<DealUser> dealUserList = dealUserRepository.findAll();
-        assertThat(dealUserList).hasSize(databaseSizeBeforeDelete );
+        assertThat(dealUserList).hasSize(databaseSizeBeforeDelete - 1);
     }
 }

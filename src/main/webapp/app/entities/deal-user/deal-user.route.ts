@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { Resolve, ActivatedRouteSnapshot, Routes, Router } from '@angular/router';
-import { JhiResolvePagingParams } from 'ng-jhipster';
 import { Observable, of, EMPTY } from 'rxjs';
 import { flatMap } from 'rxjs/operators';
 
@@ -23,11 +22,7 @@ export class DealUserResolve implements Resolve<IDealUser> {
       return this.service.find(id).pipe(
         flatMap((dealUser: HttpResponse<DealUser>) => {
           if (dealUser.body) {
-            if((dealUser.body?.deleted) && (route.url[1].path==="edit")) {
-              this.router.navigate(['/deal-user']);
-              return EMPTY;
-            } 
-              return of(dealUser.body);
+            return of(dealUser.body);
           } else {
             this.router.navigate(['404']);
             return EMPTY;
@@ -43,9 +38,6 @@ export const dealUserRoute: Routes = [
   {
     path: '',
     component: DealUserComponent,
-    resolve: {
-      pagingParams: JhiResolvePagingParams,
-    },
     data: {
       authorities: [Authority.USER],
       defaultSort: 'id,asc',

@@ -17,7 +17,7 @@ public class DealUserDTO implements Serializable {
     @NotNull
     private Gender gender;
 
-    @Pattern(regexp = "^(?:0|\\(?\\+212\\)?\\s?|00212\\s?)[1-79](?:[\\.\\-\\s]?\\d\\d){4}$")
+    @Pattern(regexp = "^(?:0|\\(?\\+212\\)?\\s?|00212\\s?)[1-79](?:[\\.\\-\\s]?\\d\\d)")
     private String phone;
 
     private String address;
@@ -36,14 +36,9 @@ public class DealUserDTO implements Serializable {
 
     private Boolean message;
 
-    private Boolean deleted = false;    
-
-    private UserDTO user;
 
     private Long userId;
     private Set<DealDTO> dealSaveds = new HashSet<>();
-
-    private int deals;
     
     public Long getId() {
         return id;
@@ -185,29 +180,4 @@ public class DealUserDTO implements Serializable {
             ", dealSaveds='" + getDealSaveds() + "'" +
             "}";
     }
-
-    public UserDTO getUser() {
-        return user;
-    }
-
-    public void setUser(UserDTO user) {
-        this.user = user;
-    }
-
-    public int getDeals() {
-        return deals;
-    }
-
-    public void setDeals(int deals) {
-        this.deals = deals;
-    }
-
-    public Boolean isDeleted() {
-        return deleted;
-    }
-
-    public void setDeleted(Boolean deleted) {
-        this.deleted = deleted;
-    }
-
 }

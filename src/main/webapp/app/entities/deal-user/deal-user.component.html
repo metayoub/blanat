@@ -1,90 +1,93 @@
-<div class="row justify-content-center">
-    <div class="col-10">
-        <h2 id="page-heading">
-            <span jhiTranslate="blanatApp.dealUser.home.title">Deal Users</span>
-    
-            <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-deal-user" [routerLink]="['/deal-user/new']">
-                <fa-icon icon="plus"></fa-icon>
-                <span  jhiTranslate="blanatApp.dealUser.home.createLabel">
-                Create a new User
-                </span>
-            </button>
-        </h2>
-    
-        <jhi-alert-error></jhi-alert-error>
-    
-        <jhi-alert></jhi-alert>
-    
-        <div class="alert alert-warning" id="no-result" *ngIf="dealUsers?.length === 0">
-            <span jhiTranslate="blanatApp.dealUser.home.notFound">No dealUsers found</span>
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="blanatApp.dealUser.home.title">Deal Users</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-deal-user" [routerLink]="['/deal-user/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span  jhiTranslate="blanatApp.dealUser.home.createLabel">
+            Create a new Deal User
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="dealUsers?.length === 0">
+        <span jhiTranslate="blanatApp.dealUser.home.notFound">No dealUsers found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="dealUsers && dealUsers.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+                    <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="gender"><span jhiTranslate="blanatApp.dealUser.gender">Gender</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="phone"><span jhiTranslate="blanatApp.dealUser.phone">Phone</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="address"><span jhiTranslate="blanatApp.dealUser.address">Address</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="city"><span jhiTranslate="blanatApp.dealUser.city">City</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="birthDay"><span jhiTranslate="blanatApp.dealUser.birthDay">Birth Day</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="comment"><span jhiTranslate="blanatApp.dealUser.comment">Comment</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="notification"><span jhiTranslate="blanatApp.dealUser.notification">Notification</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="reporting"><span jhiTranslate="blanatApp.dealUser.reporting">Reporting</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="emailNotification"><span jhiTranslate="blanatApp.dealUser.emailNotification">Email Notification</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="message"><span jhiTranslate="blanatApp.dealUser.message">Message</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="userId"><span jhiTranslate="blanatApp.dealUser.user">User</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let dealUser of dealUsers ;trackBy: trackId">
+                    <td><a [routerLink]="['/deal-user', dealUser.id, 'view']">{{ dealUser.id }}</a></td>
+                    <td jhiTranslate="{{ 'blanatApp.Gender.' + dealUser.gender }}">{{ dealUser.gender }}</td>
+                    <td>{{ dealUser.phone }}</td>
+                    <td>{{ dealUser.address }}</td>
+                    <td>{{ dealUser.city }}</td>
+                    <td>{{ dealUser.birthDay | date:'mediumDate' }}</td>
+                    <td>{{ dealUser.comment }}</td>
+                    <td>{{ dealUser.notification }}</td>
+                    <td>{{ dealUser.reporting }}</td>
+                    <td>{{ dealUser.emailNotification }}</td>
+                    <td>{{ dealUser.message }}</td>
+                    <td>
+                        {{ dealUser.userId }}
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/deal-user', dealUser.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/deal-user', dealUser.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(dealUser)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div *ngIf="dealUsers && dealUsers.length > 0">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
         </div>
 
-        <div class="table-responsive" id="entities" *ngIf="dealUsers && dealUsers.length > 0">
-            <table class="table table-striped" aria-describedby="page-heading">
-                <thead>
-                    <tr class="table-active" jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
-                        <th scope="col"  [hidden]="true" jhiSortBy="id" ><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
-                        <th scope="col"  ><span jhiTranslate="userManagement.lastName">Name</span> <fa-icon icon="sort"></fa-icon></th>
-                        <th scope="col"  ><span jhiTranslate="userManagement.login">Login</span> <fa-icon icon="sort"></fa-icon></th>
-                        <th scope="col"  ><span jhiTranslate="userManagement.email">Email</span> <fa-icon icon="sort"></fa-icon></th>
-                        <th scope="col"  ><span jhiTranslate="userManagement.deals">Deals</span> <fa-icon icon="sort"></fa-icon></th>
-                        <th scope="col"  ><span jhiTranslate="userManagement.activated">Active</span> <fa-icon icon="sort"></fa-icon></th>
-                        <th scope="col"  ><span jhiTranslate="userManagement.profiles">Droits</span> <fa-icon icon="sort"></fa-icon></th>
-                        <th scope="col"></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let dealUser of dealUsers ;trackBy: trackId">
-                        <td [hidden]="true"><a [routerLink]="['/deal-user', dealUser.id, 'view']">{{ dealUser.id }}</a></td>
-                        <td>{{ dealUser.user?.lastName || '' | uppercase }} {{ dealUser.user?.firstName || '' | titlecase  }}</td>
-                        <td>{{ dealUser.user?.login }}</td>
-                        <td>{{ dealUser.user?.email }}</td>
-                        <td>{{ dealUser.deals }}</td>
-                        <td><button type="button" class="btn"
-                            [ngClass]="dealUser.user?.activated? 'btn-outline-success':dealUser.deleted? 'btn-outline-secondary':'btn-outline-danger'" >{{ dealUser.user?.activated }}</button></td>
-                        <td>
-                            <fa-icon [hidden]="!dealUser.comment" icon="comment" data-toggle="tooltip" data-placement="bottom" title="Comment"></fa-icon>
-                            <fa-icon [hidden]="!dealUser.notification" icon="bell" data-toggle="tooltip" data-placement="bottom" title="Notification"></fa-icon>
-                            <fa-icon [hidden]="!dealUser.reporting" icon="flag" data-toggle="tooltip" data-placement="bottom" title="Report"></fa-icon>
-                            <fa-icon [hidden]="!dealUser.emailNotification" icon="envelope" data-toggle="tooltip" data-placement="bottom" title="Email notification"></fa-icon>
-                            <fa-icon [hidden]="!dealUser.message" icon="reply" data-toggle="tooltip" data-placement="bottom" title="Message"></fa-icon>
-                        </td>
-                        <td class="text-right">
-                            <div class="btn-group">
-                                <button type="submit"
-                                        [routerLink]="['/deal-user', dealUser.id, 'view']"
-                                        class="btn btn-info btn-sm">
-                                    <fa-icon icon="eye"></fa-icon>
-                                </button>
-
-                                <button type="submit" [disabled]="dealUser?.deleted"
-                                        (click)="edit(dealUser)"
-                                        class="btn btn-primary btn-sm">
-                                    <fa-icon icon="pencil-alt"></fa-icon>
-                                </button>
-    
-                                <button [disabled]="dealUser?.deleted"
-                                        type="submit" (click)="delete(dealUser)"
-                                        class="btn btn-danger btn-sm">
-                                    <fa-icon icon="times"></fa-icon>
-                                </button>
-
-                            </div>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="ngbPaginationPage" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage($event)"></ngb-pagination>
         </div>
-
-        <div *ngIf="dealUsers && dealUsers.length > 0">
-            <div class="row justify-content-center">
-                <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
-            </div>
-    
-            <div class="row justify-content-center">
-                <ngb-pagination [collectionSize]="totalItems" [(page)]="ngbPaginationPage" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage($event)"></ngb-pagination>
-            </div>
-        </div>
-
     </div>
 </div>

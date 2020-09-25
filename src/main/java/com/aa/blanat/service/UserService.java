@@ -153,7 +153,7 @@ public class UserService {
         user.setPassword(encryptedPassword);
         user.setResetKey(RandomUtil.generateResetKey());
         user.setResetDate(Instant.now());
-        user.setActivated(userDTO.isActivated());//true);
+        user.setActivated(true);
         if (userDTO.getAuthorities() != null) {
             Set<Authority> authorities = userDTO.getAuthorities().stream()
                 .map(authorityRepository::findById)
@@ -192,13 +192,11 @@ public class UserService {
                 user.setLangKey(userDTO.getLangKey());
                 Set<Authority> managedAuthorities = user.getAuthorities();
                 managedAuthorities.clear();
-                if (userDTO.getAuthorities()!=null) {
-                    userDTO.getAuthorities().stream()
+                userDTO.getAuthorities().stream()
                     .map(authorityRepository::findById)
                     .filter(Optional::isPresent)
                     .map(Optional::get)
                     .forEach(managedAuthorities::add);
-                }
                 this.clearUserCaches(user);
                 log.debug("Changed Information for User: {}", user);
                 return user;
@@ -212,13 +210,6 @@ public class UserService {
             this.clearUserCaches(user);
             log.debug("Deleted User: {}", user);
         });
-    }
-
-    public void deleteByStatus(Long id){
-        Optional<User> userDelete = userRepository.findById(id);
-        User _userDelete = userDelete.get();
-        _userDelete.setActivated(false);
-        userRepository.save(_userDelete);
     }
 
     /**
