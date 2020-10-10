@@ -111,7 +111,6 @@ public class CommentHistoryResource {
     @DeleteMapping("/comment-histories/{id}")
     public ResponseEntity<Void> deleteCommentHistory(@PathVariable Long id) {
         log.debug("REST request to delete CommentHistory : {}", id);
-
         commentHistoryService.delete(id);
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
     }

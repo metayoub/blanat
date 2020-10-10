@@ -120,7 +120,6 @@ public class DealTrackResource {
     @DeleteMapping("/deal-tracks/{id}")
     public ResponseEntity<Void> deleteDealTrack(@PathVariable Long id) {
         log.debug("REST request to delete DealTrack : {}", id);
-
         dealTrackService.delete(id);
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
     }

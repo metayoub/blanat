@@ -79,7 +79,6 @@ public class DealCategoryService {
      */
     public void delete(Long id) {
         log.debug("Request to delete DealCategory : {}", id);
-
         dealCategoryRepository.deleteById(id);
     }
 }

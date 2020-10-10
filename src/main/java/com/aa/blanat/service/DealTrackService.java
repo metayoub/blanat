@@ -79,7 +79,6 @@ public class DealTrackService {
      */
     public void delete(Long id) {
         log.debug("Request to delete DealTrack : {}", id);
-
         dealTrackRepository.deleteById(id);
     }
 }

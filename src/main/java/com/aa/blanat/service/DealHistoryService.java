@@ -79,7 +79,6 @@ public class DealHistoryService {
      */
     public void delete(Long id) {
         log.debug("Request to delete DealHistory : {}", id);
-
         dealHistoryRepository.deleteById(id);
     }
 }

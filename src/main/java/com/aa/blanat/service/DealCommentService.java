@@ -79,7 +79,6 @@ public class DealCommentService {
      */
     public void delete(Long id) {
         log.debug("Request to delete DealComment : {}", id);
-
         dealCommentRepository.deleteById(id);
     }
 }

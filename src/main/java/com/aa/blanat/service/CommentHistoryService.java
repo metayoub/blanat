@@ -80,7 +80,6 @@ public class CommentHistoryService {
      */
     public void delete(Long id) {
         log.debug("Request to delete CommentHistory : {}", id);
-
         commentHistoryRepository.deleteById(id);
     }
 }

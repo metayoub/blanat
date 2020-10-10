@@ -88,7 +88,6 @@ public class DealService {
      */
     public void delete(Long id) {
         log.debug("Request to delete Deal : {}", id);
-
         dealRepository.deleteById(id);
     }
 }

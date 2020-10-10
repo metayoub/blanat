@@ -39,7 +39,7 @@ describe('Component Tests', () => {
         tick(); // simulate async
 
         // THEN
-        // expect(service.update).toHaveBeenCalledWith(entity);
+        expect(service.update).toHaveBeenCalledWith(entity);
         expect(comp.isSaving).toEqual(false);
       }));
 
@@ -51,8 +51,9 @@ describe('Component Tests', () => {
         // WHEN
         comp.save();
         tick(); // simulate async
+
         // THEN
-        // expect(service.create).toHaveBeenCalledWith(entity);
+        expect(service.create).toHaveBeenCalledWith(entity);
         expect(comp.isSaving).toEqual(false);
       }));
     });

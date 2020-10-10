@@ -126,7 +126,6 @@ public class DealResource {
     @DeleteMapping("/deals/{id}")
     public ResponseEntity<Void> deleteDeal(@PathVariable Long id) {
         log.debug("REST request to delete Deal : {}", id);
-
         dealService.delete(id);
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
     }
