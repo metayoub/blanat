@@ -19,6 +19,7 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.TimeZone;
 
 @SpringBootApplication
 @EnableConfigurationProperties({LiquibaseProperties.class, ApplicationProperties.class})
@@ -41,6 +42,8 @@ public class BlanatApp {
      */
     @PostConstruct
     public void initApplication() {
+        TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
+
         Collection<String> activeProfiles = Arrays.asList(env.getActiveProfiles());
         if (activeProfiles.contains(JHipsterConstants.SPRING_PROFILE_DEVELOPMENT) && activeProfiles.contains(JHipsterConstants.SPRING_PROFILE_PRODUCTION)) {
             log.error("You have misconfigured your application! It should not run " +
