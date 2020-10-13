@@ -38,6 +38,7 @@ export interface IDeal {
   dealTracks?: IDealTrack[];
   dealReports?: IDealReport[];
   dealComments?: IDealComment[];
+  assignedTo?: IDealUser;
   assignedToId?: number;
   dealCategories?: IDealCategory[];
   dealUsers?: IDealUser[];
@@ -73,6 +74,7 @@ export class Deal implements IDeal {
     public dealTracks?: IDealTrack[],
     public dealReports?: IDealReport[],
     public dealComments?: IDealComment[],
+    public assignedTo?: IDealUser,
     public assignedToId?: number,
     public dealCategories?: IDealCategory[],
     public dealUsers?: IDealUser[]

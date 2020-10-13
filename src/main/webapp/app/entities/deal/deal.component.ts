@@ -13,6 +13,7 @@ import { DealDeleteDialogComponent } from './deal-delete-dialog.component';
 @Component({
   selector: 'jhi-deal',
   templateUrl: './deal.component.html',
+  styleUrls: ['deal.scss'],
 })
 export class DealComponent implements OnInit, OnDestroy {
   deals: IDeal[];

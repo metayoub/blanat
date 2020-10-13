@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.Set;
 import com.aa.blanat.domain.enumeration.TypeDeal;
 import com.aa.blanat.domain.enumeration.TypeCoupon;
+import com.aa.blanat.domain.DealUser;
 import com.aa.blanat.domain.enumeration.StatutDeal;
 
 /**
@@ -71,7 +72,8 @@ public class DealDTO implements Serializable {
 
     private Long dealLocationId;
 
-    private Long assignedToId;
+    private  DealUserDTO assignedTo;
+
     private Set<DealCategoryDTO> dealCategories = new HashSet<>();
     
     public Long getId() {
@@ -266,12 +268,12 @@ public class DealDTO implements Serializable {
         this.dealLocationId = dealLocationId;
     }
 
-    public Long getAssignedToId() {
-        return assignedToId;
+    public DealUserDTO getAssignedTo() {
+        return assignedTo;
     }
 
-    public void setAssignedToId(Long dealUserId) {
-        this.assignedToId = dealUserId;
+    public void setAssignedTo(DealUserDTO dealUser){
+        this.assignedTo = dealUser;
     }
 
     public Set<DealCategoryDTO> getDealCategories() {
@@ -327,7 +329,7 @@ public class DealDTO implements Serializable {
             ", isDeleted='" + isIsDeleted() + "'" +
             ", isBlocked='" + isIsBlocked() + "'" +
             ", dealLocationId=" + getDealLocationId() +
-            ", assignedToId=" + getAssignedToId() +
+            ", assignedTo=" + getAssignedTo() +
             ", dealCategories='" + getDealCategories() + "'" +
             "}";
     }
