@@ -7,6 +7,7 @@ import { BlanatTestModule } from '../../../test.module';
 import { DealUserUpdateComponent } from 'app/entities/deal-user/deal-user-update.component';
 import { DealUserService } from 'app/entities/deal-user/deal-user.service';
 import { DealUser } from 'app/shared/model/deal-user.model';
+import { User } from 'app/core/user/user.model';
 
 describe('Component Tests', () => {
   describe('DealUser Management Update Component', () => {
@@ -32,6 +33,7 @@ describe('Component Tests', () => {
       it('Should call update service on save for existing entity', fakeAsync(() => {
         // GIVEN
         const entity = new DealUser(123);
+        entity.user = new User(123);
         spyOn(service, 'update').and.returnValue(of(new HttpResponse({ body: entity })));
         comp.updateForm(entity);
         // WHEN
@@ -46,6 +48,7 @@ describe('Component Tests', () => {
       it('Should call create service on save for new entity', fakeAsync(() => {
         // GIVEN
         const entity = new DealUser();
+        entity.user = new User();
         spyOn(service, 'create').and.returnValue(of(new HttpResponse({ body: entity })));
         comp.updateForm(entity);
         // WHEN

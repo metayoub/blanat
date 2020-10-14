@@ -12,32 +12,30 @@ export class DealUserDetailComponent implements OnInit {
   disabled: Boolean = true;
   editForm = this.fb.group({
     id: '',
-      gender: '',
-      phone: '',
-      address: '',
-      city: '',
-      birthDay: '',
-      comment: '',
-      notification: '',
-      reporting: '',
-      emailNotification: '',
-      message: '',
-      userId: '',
-      dealSaveds: '',
-      login: '',
-      firstName: '',
-      lastName: '',
-      email: '',
-      activated: '',
-      authorities: '',
+    gender: '',
+    phone: '',
+    address: '',
+    city: '',
+    birthDay: '',
+    comment: '',
+    notification: '',
+    reporting: '',
+    emailNotification: '',
+    message: '',
+    userId: '',
+    dealSaveds: '',
+    login: '',
+    firstName: '',
+    lastName: '',
+    email: '',
+    activated: '',
+    authorities: '',
   });
 
-  constructor(protected activatedRoute: ActivatedRoute,
-    private fb: FormBuilder) {}
+  constructor(protected activatedRoute: ActivatedRoute, private fb: FormBuilder) {}
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ dealUser }) => {
-      // this.dealUser=dealUser;
       this.updateForm(dealUser);
     });
   }

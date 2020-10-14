@@ -65,6 +65,7 @@ public class DealService {
      * @return the list of entities.
      */
     public Page<DealDTO> findAllWithEagerRelationships(Pageable pageable) {
+        log.debug("Request to get all Deals with Eager relationships");
         return dealRepository.findAllWithEagerRelationships(pageable).map(dealMapper::toDto);
     }
 

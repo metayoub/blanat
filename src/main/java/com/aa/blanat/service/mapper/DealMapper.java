@@ -13,7 +13,7 @@ import org.mapstruct.*;
 public interface DealMapper extends EntityMapper<DealDTO, Deal> {
 
     @Mapping(source = "dealLocation.id", target = "dealLocationId")
-    @Mapping(source = "assignedTo.id", target = "assignedToId")
+    // @Mapping(source = "assignedTo.id", target = "assignedToId")
     DealDTO toDto(Deal deal);
 
     @Mapping(source = "dealLocationId", target = "dealLocation")
@@ -25,7 +25,7 @@ public interface DealMapper extends EntityMapper<DealDTO, Deal> {
     @Mapping(target = "removeDealReport", ignore = true)
     @Mapping(target = "dealComments", ignore = true)
     @Mapping(target = "removeDealComment", ignore = true)
-    @Mapping(source = "assignedToId", target = "assignedTo")
+    // @Mapping(source = "assignedToId", target = "assignedTo")
     @Mapping(target = "removeDealCategory", ignore = true)
     @Mapping(target = "dealUsers", ignore = true)
     @Mapping(target = "removeDealUser", ignore = true)
