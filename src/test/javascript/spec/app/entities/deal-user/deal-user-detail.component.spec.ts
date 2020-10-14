@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
 import { of } from 'rxjs';
+import { FormBuilder } from '@angular/forms';
 
 import { BlanatTestModule } from '../../../test.module';
 import { DealUserDetailComponent } from 'app/entities/deal-user/deal-user-detail.component';
@@ -16,7 +17,7 @@ describe('Component Tests', () => {
       TestBed.configureTestingModule({
         imports: [BlanatTestModule],
         declarations: [DealUserDetailComponent],
-        providers: [{ provide: ActivatedRoute, useValue: route }],
+        providers: [{ provide: ActivatedRoute, useValue: route }, FormBuilder],
       })
         .overrideTemplate(DealUserDetailComponent, '')
         .compileComponents();
@@ -30,7 +31,7 @@ describe('Component Tests', () => {
         comp.ngOnInit();
 
         // THEN
-        expect(comp.dealUser).toEqual(jasmine.objectContaining({ id: 123 }));
+        expect(comp.editForm.get(['id'])!.value).toBe(123);
       });
     });
   });

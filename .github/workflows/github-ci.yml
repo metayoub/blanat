@@ -28,8 +28,8 @@ jobs:
               run: |
                   chmod +x mvnw
                   ./mvnw -ntp clean verify -P-webpack
-            # - name: Run frontend test
-              # run: npm run test
+            - name: Run frontend test
+              run: npm run test
             - name: Package application
               run: ./mvnw -ntp package -Pprod -DskipTests
             - name: Build and publish docker image
