@@ -18,27 +18,91 @@
           </div>
       </div>
         <div class="list-group" id="list-tab" role="tablist">
-          <a class="list-group-item list-group-item-action" [class.active]="step === 'home'" id="list-home-list" data-toggle="list" role="tab" (click)="goToHome()" aria-controls="home">Home</a>
-          <a class="list-group-item list-group-item-action" [class.active]="step === 'profile'" id="list-profile-list" data-toggle="list" role="tab" (click)="goToProfile()" aria-controls="profile">Profile</a>
-          <a class="list-group-item list-group-item-action" [class.active]="step === 'messages'" id="list-messages-list" data-toggle="list" role="tab" (click)="goToMessages()" aria-controls="messages">Messages</a>
-          <a class="list-group-item list-group-item-action" [class.active]="step === 'settings'" id="list-settings-list" data-toggle="list" role="tab" (click)="goToSettings()" aria-controls="settings">Settings</a>
+          <a class="list-group-item list-group-item-action" [class.active]="step === 'deal'" id="list-deal-list" data-toggle="list" role="tab" (click)="goToDeal()" aria-controls="home">Deal</a>
+          <a class="list-group-item list-group-item-action" [class.active]="step === 'user'" id="list-user-list" data-toggle="list" role="tab" (click)="goToUser()" aria-controls="profile">User</a>
+          <a class="list-group-item list-group-item-action" [class.active]="step === 'comments'" id="list-comments-list" data-toggle="list" role="tab" (click)="goToComments()" aria-controls="messages">Comments</a>
+          <a class="list-group-item list-group-item-action" [class.active]="step === 'history'" id="list-history-list" data-toggle="list" role="tab" (click)="goToHistory()" aria-controls="settings">History</a>
+          <a class="list-group-item list-group-item-action" [class.active]="step === 'report'" id="list-report-list" data-toggle="list" role="tab" (click)="goToReport()" aria-controls="settings">Report</a>
+          <a class="list-group-item list-group-item-action" [class.active]="step === 'track'" id="list-track-list" data-toggle="list" role="tab" (click)="goToTrack()" aria-controls="settings">Track</a>
         </div>
       </div>
     </div>
 
     <div class="card border-primary col-8">
       <div class="card-body">
-        <div [hidden]="step !== 'home'">
-          Home
+        <div [hidden]="step !== 'deal'">
+          <div class="row">
+            <div class="col align-self-center">
+              <div class="row">
+                <div class="col-9">
+                  <p class="font-weight-bold m-0">{{ deal.title }}</p>
+                  <p class="text-left pl-1">
+                    <span class="font-weight-bold text-danger" *ngIf="deal.type=='DEAL'">
+                      {{ deal.price }}Dhs
+                    </span>
+                    <span class="font-weight-bold text-danger" *ngIf="deal.type=='COUPON' && deal.couponType=='PERCENTAGE'">
+                        {{ deal.couponPercentage }}%
+                    </span>
+                    <span class="font-weight-bold text-danger" *ngIf="deal.type=='COUPON' && deal.couponType=='DHS'">
+                        {{ deal.couponValue }}Dhs
+                    </span>
+                     | 
+                    <span>
+                      Type: {{ deal.type }}
+                    </span>
+                     | 
+                    <span *ngIf="deal.priceShipping!==0">
+                      Livraison: {{ deal.priceShipping }}Dhs
+                    </span>
+                  </p>
+                </div>
+                <div class="col-3">
+                  <button type="button" class="btn" [ngClass]="{'btn-danger': deal.statut=='EXPIRED', 'btn-success': deal.statut=='ACTIVE', 'btn-warning': deal.statut=='HIDDEN', 'btn-dark': deal.statut=='PENDING'}" disabled>{{ deal.statut}}</button>
+                </div>
+              </div>
+              <div class="row mt-3 p-3 border border-secondary">
+                <div class="col-4"><fa-icon icon="eye" class="mx-2"></fa-icon>{{ deal.views }}</div>
+                <div class="col-4"><fa-icon icon="thumbs-up" class="mx-2"></fa-icon>{{ deal.like }}</div>
+                <div class="col-4"><fa-icon icon="thumbs-down" class="mx-2"></fa-icon>{{ deal.dislike }}</div>
+              </div>
+              <div class="row mt-3">
+                <div class="col">
+                  Date de publicaion: {{ deal.datePublication | date:'mediumDate' }}
+                </div>
+                <div class="col">
+                  Date de début: {{ deal.dateStart | date:'mediumDate' }}
+                </div>
+                <div class="col">
+                  Date de fin: {{ deal.dateEnd | date:'mediumDate' }}
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row mt-3">
+            <div class="col align-self-center">
+              {{ deal.description}}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col align-self-center" *ngFor="let cat of deal.dealCategories">
+              {{ cat.categoryName}}
+            </div>
+          </div>
         </div>
-        <div [hidden]="step !== 'profile'">
-          Profile
+        <div [hidden]="step !== 'user'">
+          B
         </div>
-        <div [hidden]="step !== 'messages'">
-          Messages
+        <div [hidden]="step !== 'comments'">
+          C
         </div>
-        <div [hidden]="step !== 'settings'">
-          Settings
+        <div [hidden]="step !== 'history'">
+          D
+        </div>
+        <div [hidden]="step !== 'report'">
+          E
+        </div>
+        <div [hidden]="step !== 'track'">
+          F
         </div>
       </div>
     </div>

@@ -70,6 +70,11 @@ export class DealUpdateComponent implements OnInit {
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ deal }) => {
+      // eslint-disable-next-line no-console
+      console.log('deal');
+      // eslint-disable-next-line no-console
+      console.log(deal);
+
       this.updateForm(deal);
 
       this.dealLocationService
@@ -126,7 +131,7 @@ export class DealUpdateComponent implements OnInit {
       isDeleted: deal.isDeleted,
       isBlocked: deal.isBlocked,
       dealLocationId: deal.dealLocationId,
-      assignedToId: deal.assignedToId,
+      assignedToId: deal.assignedTo?.id,
       dealCategories: deal.dealCategories,
     });
   }

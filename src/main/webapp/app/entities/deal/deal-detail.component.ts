@@ -15,23 +15,29 @@ export class DealDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ deal }) => (this.deal = deal));
-    this.step = 'home';
+    this.step = 'deal';
   }
 
   previousState(): void {
     window.history.back();
   }
 
-  goToHome(): void {
-    this.step = 'home';
+  goToDeal(): void {
+    this.step = 'deal';
   }
-  goToProfile(): void {
-    this.step = 'profile';
+  goToUser(): void {
+    this.step = 'user';
   }
-  goToMessages(): void {
-    this.step = 'messages';
+  goToComments(): void {
+    this.step = 'comments';
   }
-  goToSettings(): void {
-    this.step = 'settings';
+  goToHistory(): void {
+    this.step = 'history';
+  }
+  goToReport(): void {
+    this.step = 'report';
+  }
+  goToTrack(): void {
+    this.step = 'track';
   }
 }
