@@ -90,7 +90,79 @@
           </div>
         </div>
         <div [hidden]="step !== 'user'">
-          B
+          <div class="row">
+              <div class="col col-md-6">
+                  <div class="form-group">
+                      <label class="form-control-label" jhiTranslate="userManagement.login">Login</label>
+                      <input type="text" class="form-control" name="login"
+                        placeholder="login" [(ngModel)]="deal.assignedTo!.user!.login" [routerLink]="['/deal-user', deal.assignedTo!.user!.id, 'view']" readonly>
+                  </div>
+              </div>
+              <div class="col col-md-6">
+                  <div class="form-group">
+                      <label class="form-control-label" jhiTranslate="userManagement.email">Email</label>
+                      <input type="email" class="form-control" name="email" 
+                        placeholder="email" [(ngModel)]="deal.assignedTo!.user!.email" readonly>
+                  </div>
+              </div>
+          </div>
+          <div class="row">
+              <div class="col col-md-6">
+                  <div class="form-group">
+                      <label class="form-control-label" jhiTranslate="userManagement.firstName">First Name</label>
+                      <input type="text" class="form-control" name="firstName"
+                         placeholder="firstname" [(ngModel)]="deal.assignedTo!.user!.firstName" readonly>
+                  </div>
+              </div>
+              <div class="col col-md-6">
+                  <div class="form-group">
+                      <label jhiTranslate="userManagement.lastName">Last Name</label>
+                      <input type="text" class="form-control" name="lastName"
+                        placeholder="lastname" [(ngModel)]="deal.assignedTo!.user!.lastName" readonly>
+                  </div>
+              </div>
+          </div>
+          <div class="row">
+              <div class="col col-md-4">
+                  <div class="form-group">
+                      <label class="form-control-label" jhiTranslate="blanatApp.dealUser.gender" for="field_gender">Gender</label>
+                      <input type="text" class="form-control" name="gender"
+                         placeholder="gender" [(ngModel)]="deal.assignedTo!.gender" readonly>
+                  </div>
+              </div>
+              <div class="col col-md-4">
+                  <div class="form-group">
+                      <label class="form-control-label" jhiTranslate="blanatApp.dealUser.birthDay" for="field_birthDay">Birth Day</label>
+                      <div class="input-group">
+                        <input type="text" class="form-control" name="phone" id="field_birthDay"
+                        placeholder="06 66 66 66 66" [(ngModel)]="deal.assignedTo!.birthDay" readonly/>
+                      </div>
+                  </div>
+              </div>
+              <div class="col col-md-4">
+                  <div class="form-group">
+                      <label class="form-control-label" jhiTranslate="blanatApp.dealUser.phone" for="field_phone">Phone</label>
+                      <input type="text" class="form-control" name="phone" id="field_phone"
+                        placeholder="06 66 66 66 66" [(ngModel)]="deal.assignedTo!.phone" readonly/>
+                  </div>
+              </div>
+          </div>
+          <div class="row">
+              <div class="col col-md-9">
+                  <div class="form-group">
+                      <label class="form-control-label" jhiTranslate="blanatApp.dealUser.phone" for="field_address">Address</label>
+                      <input type="text" class="form-control" name="address" id="field_address"
+                      [(ngModel)]="deal.assignedTo!.address" readonly/>
+                  </div>
+              </div>
+              <div class="col col-md-3">
+                  <div class="form-group">
+                      <label class="form-control-label" jhiTranslate="blanatApp.dealUser.city" for="field_city">City</label>
+                      <input type="text" class="form-control" name="city" id="field_city"
+                      [(ngModel)]="deal.assignedTo!.city" readonly/>
+                  </div>
+              </div>
+          </div>
         </div>
         <div [hidden]="step !== 'comments'">
           C
