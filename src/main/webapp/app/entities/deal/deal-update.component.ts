@@ -56,6 +56,7 @@ export class DealUpdateComponent implements OnInit {
     isBlocked: [],
     dealLocationId: [],
     assignedToId: [null, Validators.required],
+    assignedTo: [null],
     dealCategories: [],
   });
 
@@ -70,7 +71,9 @@ export class DealUpdateComponent implements OnInit {
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ deal }) => {
-      this.updateForm(deal);
+      if (deal.id !== undefined) {
+        this.updateForm(deal);
+      }
 
       this.dealLocationService
         .query({ filter: 'deal-is-null' })
@@ -126,6 +129,7 @@ export class DealUpdateComponent implements OnInit {
       isDeleted: deal.isDeleted,
       isBlocked: deal.isBlocked,
       dealLocationId: deal.dealLocationId,
+      assignedTo: deal.assignedTo,
       assignedToId: deal.assignedTo!.id,
       dealCategories: deal.dealCategories,
     });
@@ -138,7 +142,7 @@ export class DealUpdateComponent implements OnInit {
   save(): void {
     this.isSaving = true;
     const deal = this.createFromForm();
-    if (deal.id !== undefined) {
+    if (deal.id !== null) {
       this.subscribeToSaveResponse(this.dealService.update(deal));
     } else {
       this.subscribeToSaveResponse(this.dealService.create(deal));
@@ -173,7 +177,7 @@ export class DealUpdateComponent implements OnInit {
       isBlocked: this.editForm.get(['isBlocked'])!.value,
       dealLocationId: this.editForm.get(['dealLocationId'])!.value,
       assignedToId: this.editForm.get(['assignedToId'])!.value,
-      assignedTo: this.dealusers.find(element => element === this.editForm.get(['assignedToId'])!.value),
+      assignedTo: this.dealusers.find(element => element.id === this.editForm.get(['assignedToId'])!.value),
       dealCategories: this.editForm.get(['dealCategories'])!.value,
     };
   }
