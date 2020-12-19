@@ -23,6 +23,7 @@ export class DealComponent implements OnInit, OnDestroy {
   page: number;
   predicate: string;
   ascending: boolean;
+  hasNextPage = true;
 
   constructor(
     protected dealService: DealService,
@@ -37,17 +38,19 @@ export class DealComponent implements OnInit, OnDestroy {
       last: 0,
     };
     this.predicate = 'id';
-    this.ascending = true;
+    this.ascending = false;
   }
 
   loadAll(): void {
-    this.dealService
-      .query({
-        page: this.page,
-        size: this.itemsPerPage,
-        sort: this.sort(),
-      })
-      .subscribe((res: HttpResponse<IDeal[]>) => this.paginateDeals(res.body, res.headers));
+    if (this.hasNextPage) {
+      this.dealService
+        .query({
+          page: this.page,
+          size: this.itemsPerPage,
+          sort: this.sort(),
+        })
+        .subscribe((res: HttpResponse<IDeal[]>) => this.paginateDeals(res.body, res.headers));
+    }
   }
 
   reset(): void {
@@ -93,6 +96,9 @@ export class DealComponent implements OnInit, OnDestroy {
     }
     return result;
   }
+  onScroll(): void {
+    this.loadPage(this.page + 1);
+  }
 
   protected paginateDeals(data: IDeal[] | null, headers: HttpHeaders): void {
     const headersLink = headers.get('link');
@@ -100,6 +106,9 @@ export class DealComponent implements OnInit, OnDestroy {
     if (data) {
       for (let i = 0; i < data.length; i++) {
         this.deals.push(data[i]);
+      }
+      if (this.deals.length === Number(headers.get('X-Total-Count'))) {
+        this.hasNextPage = false;
       }
     }
   }

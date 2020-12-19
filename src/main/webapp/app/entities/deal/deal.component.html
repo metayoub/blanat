@@ -19,7 +19,7 @@
     </div>
 
     <div class="container-fluid" id="entities" *ngIf="deals && deals.length > 0">
-        <div class="list-group">
+        <div class="list-group" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="itemsPerPage" (scrolled)="onScroll()">
             <li class="list-group-item list-group-item-action flex-column items-start" 
             *ngFor="let deal of deals">
             <div class="row">
