@@ -130,7 +130,7 @@ export class DealUpdateComponent implements OnInit {
       isBlocked: deal.isBlocked,
       dealLocationId: deal.dealLocationId,
       assignedTo: deal.assignedTo,
-      assignedToId: deal.assignedTo!.id,
+      assignedToId: deal.assignedTo ? deal.assignedTo.id : undefined,
       dealCategories: deal.dealCategories,
     });
   }
@@ -142,7 +142,7 @@ export class DealUpdateComponent implements OnInit {
   save(): void {
     this.isSaving = true;
     const deal = this.createFromForm();
-    if (deal.id !== null) {
+    if (deal.id !== null && deal.id !== undefined) {
       this.subscribeToSaveResponse(this.dealService.update(deal));
     } else {
       this.subscribeToSaveResponse(this.dealService.create(deal));
