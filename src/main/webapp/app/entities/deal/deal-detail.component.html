@@ -164,8 +164,16 @@
               </div>
           </div>
         </div>
-        <div [hidden]="step !== 'comments'">
-          C
+        <div class="comments" [hidden]="step !== 'comments'">
+          <div class="comment" *ngFor="let comment of comments">
+            <div class="pic">
+              <img src="../../../content/images/jhipster_family_member_1.svg" alt="profile-img">
+            </div>
+            <div class="comment-text">
+              <span>{{comment.assignedToId}}</span>
+              <p>{{comment.id}} - {{comment.comment}}</p>
+            </div>
+          </div>
         </div>
         <div [hidden]="step !== 'history'">
           D

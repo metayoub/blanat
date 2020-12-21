@@ -75,6 +75,8 @@ public class DealDTO implements Serializable {
     private  DealUserDTO assignedTo;
 
     private Set<DealCategoryDTO> dealCategories = new HashSet<>();
+
+    private Set<DealCommentDTO> dealComments = new HashSet<>();
     
     public Long getId() {
         return id;
@@ -284,6 +286,14 @@ public class DealDTO implements Serializable {
         this.dealCategories = dealCategories;
     }
 
+    public Set<DealCommentDTO> getDealComments() {
+        return dealComments;
+    }
+
+    public void setComments(Set<DealCommentDTO> dealComments) {
+        this.dealComments = dealComments;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -331,6 +341,7 @@ public class DealDTO implements Serializable {
             ", dealLocationId=" + getDealLocationId() +
             ", assignedTo=" + getAssignedTo() +
             ", dealCategories='" + getDealCategories() + "'" +
+            ", dealComments='" + getDealComments() + "'" +
             "}";
     }
 }

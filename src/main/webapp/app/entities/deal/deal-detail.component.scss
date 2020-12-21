@@ -1,0 +1,29 @@
+.comments {
+  margin-bottom: 30px;
+  max-width: 500px;
+  .comment {
+    display: flex;
+    .pic {
+      display: flex;
+      align-items: center;
+      img {
+        height: 40px;
+        width: 40px;
+        border-radius: 50%;
+      }
+    }
+    .comment-text {
+      padding: 10px;
+      span {
+        font-size: 11px;
+        opacity: 0.8;
+        font-weight: bold;
+      }
+      p {
+        font-size: 15px;
+        opacity: 0.6;
+        margin: 2px 0;
+      }
+    }
+  }
+}

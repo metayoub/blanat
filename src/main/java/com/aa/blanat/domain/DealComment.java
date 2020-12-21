@@ -259,6 +259,7 @@ public class DealComment implements Serializable {
             ", isDeleted='" + isIsDeleted() + "'" +
             ", like=" + getLike() +
             ", dislike=" + getDislike() +
+            ", assignedTo=" + getAssignedTo() +
             ", dateLastModification='" + getDateLastModification() + "'" +
             "}";
     }
