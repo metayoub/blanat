@@ -3,15 +3,16 @@ import { ActivatedRoute } from '@angular/router';
 
 import { IDeal } from 'app/shared/model/deal.model';
 import { IDealComment } from 'app/shared/model/deal-comment.model';
+import { IDealHistory } from 'app/shared/model/deal-history.model';
 
 @Component({
   selector: 'jhi-deal-detail',
   templateUrl: './deal-detail.component.html',
-  styleUrls: ['deal-detail.component.scss'],
 })
 export class DealDetailComponent implements OnInit {
   deal: IDeal | null = null;
   comments: IDealComment[] = [];
+  histories: IDealHistory[] = [];
   step: String = '';
 
   constructor(protected activatedRoute: ActivatedRoute) {}
@@ -20,10 +21,14 @@ export class DealDetailComponent implements OnInit {
     this.activatedRoute.data.subscribe(({ deal }) => {
       this.deal = deal;
       if (deal.dealComments.length > 0) this.comments = deal.dealComments;
+      if (deal.dealHistories.length > 0) this.histories = deal.dealHistories;
     });
     this.step = 'deal';
+    this.comments.sort(function (a, b): any {
+      return a.id! < b.id! ? -1 : a.id! > b.id! ? 1 : 0;
+    });
     // eslint-disable-next-line no-console
-    console.log(this.comments);
+    console.log(this.deal);
   }
 
   previousState(): void {

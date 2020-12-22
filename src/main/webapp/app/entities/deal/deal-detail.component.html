@@ -164,19 +164,46 @@
               </div>
           </div>
         </div>
-        <div class="comments" [hidden]="step !== 'comments'">
-          <div class="comment" *ngFor="let comment of comments">
-            <div class="pic">
-              <img src="../../../content/images/jhipster_family_member_1.svg" alt="profile-img">
+        <div class="container" [hidden]="step !== 'comments'">
+          <div class="row mt-2 border-bottom" *ngFor="let comment of comments">
+            <div class="col-2">
+              <img src="../../../content/images/jhipster_family_member_1.svg" alt="profile-img" class="rounded-circle">
             </div>
-            <div class="comment-text">
-              <span>{{comment.assignedToId}}</span>
-              <p>{{comment.id}} - {{comment.comment}}</p>
+            <div class="col-9">
+                <div class="d-flex">
+                  <p class="font-weight-bold mr-auto p-2 mb-0" [routerLink]="['/deal-user', comment.assignedToId, 'view']" >Robin Hood</p>
+                  <p class="p-2 mb-0">{{comment.dateComment | date:'shortDate'}} </p>
+                  <p class="font-italic p-2 mb-0" *ngIf="comment.dateLastModification!">Edited</p>
+                </div>
+                <div class="d-flex m-2" [routerLink]="['/deal-comment', comment.id, 'view']">
+                  {{comment.comment}}
+                </div>
+                <div class="d-flex m-2">
+                  <fa-icon class="mr-1" icon="thumbs-up"></fa-icon> <span>{{comment.like}}</span>
+                  <fa-icon class="ml-3 mr-1" icon="thumbs-down"></fa-icon> <span>{{comment.dislike}}</span>
+                </div>
             </div>
           </div>
         </div>
         <div [hidden]="step !== 'history'">
-          D
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th scope="col" [hidden]="true">id</th>
+                <th scope="col" jhiTranslate="blanatApp.dealHistory.attributName">Attribut Name</th>
+                <th scope="col" jhiTranslate="blanatApp.dealHistory.attributLastValue">Attribut Last Value</th>
+                <th scope="col" jhiTranslate="blanatApp.dealHistory.dateModification">Date Modification</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let history of histories">
+                <th scope="row" [hidden]="true">{{history.id}}</th>
+                <td>{{history.attributName}}</td>
+                <td>{{history.attributLastValue}}</td>
+                <td>{{history.dateModification}}</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
         <div [hidden]="step !== 'report'">
           E
