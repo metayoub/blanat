@@ -3,7 +3,9 @@ package com.aa.blanat.service;
 import com.aa.blanat.domain.Deal;
 import com.aa.blanat.repository.DealRepository;
 import com.aa.blanat.service.dto.DealDTO;
+import com.aa.blanat.service.dto.DealDTOList;
 import com.aa.blanat.service.mapper.DealMapper;
+import com.aa.blanat.service.mapper.DealListMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -27,9 +29,13 @@ public class DealService {
 
     private final DealMapper dealMapper;
 
-    public DealService(DealRepository dealRepository, DealMapper dealMapper) {
+    private final DealListMapper dealListMapper;
+
+    public DealService(DealRepository dealRepository, DealMapper dealMapper,
+             DealListMapper dealListMapper) {
         this.dealRepository = dealRepository;
         this.dealMapper = dealMapper;
+        this.dealListMapper = dealListMapper;
     }
 
     /**
@@ -52,10 +58,10 @@ public class DealService {
      * @return the list of entities.
      */
     @Transactional(readOnly = true)
-    public Page<DealDTO> findAll(Pageable pageable) {
+    public Page<DealDTOList> findAll(Pageable pageable) {
         log.debug("Request to get all Deals");
         return dealRepository.findAll(pageable)
-            .map(dealMapper::toDto);
+            .map(dealListMapper::toDto);
     }
 
 
@@ -64,9 +70,9 @@ public class DealService {
      *
      * @return the list of entities.
      */
-    public Page<DealDTO> findAllWithEagerRelationships(Pageable pageable) {
+    public Page<DealDTOList> findAllWithEagerRelationships(Pageable pageable) {
         log.debug("Request to get all Deals with Eager relationships");
-        return dealRepository.findAllWithEagerRelationships(pageable).map(dealMapper::toDto);
+        return dealRepository.findAllWithEagerRelationships(pageable).map(dealListMapper::toDto);
     }
 
     /**

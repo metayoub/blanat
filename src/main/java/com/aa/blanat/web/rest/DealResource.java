@@ -3,6 +3,7 @@ package com.aa.blanat.web.rest;
 import com.aa.blanat.service.DealService;
 import com.aa.blanat.web.rest.errors.BadRequestAlertException;
 import com.aa.blanat.service.dto.DealDTO;
+import com.aa.blanat.service.dto.DealDTOList;
 
 import io.github.jhipster.web.util.HeaderUtil;
 import io.github.jhipster.web.util.PaginationUtil;
@@ -92,9 +93,9 @@ public class DealResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of deals in body.
      */
     @GetMapping("/deals")
-    public ResponseEntity<List<DealDTO>> getAllDeals(Pageable pageable, @RequestParam(required = false, defaultValue = "false") boolean eagerload) {
+    public ResponseEntity<List<DealDTOList>> getAllDeals(Pageable pageable, @RequestParam(required = false, defaultValue = "false") boolean eagerload) {
         log.debug("REST request to get a page of Deals");
-        Page<DealDTO> page;
+        Page<DealDTOList> page;
         if (eagerload) {
             page = dealService.findAllWithEagerRelationships(pageable);
         } else {
