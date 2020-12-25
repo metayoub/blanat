@@ -28,7 +28,7 @@ public class DealCommentDTO implements Serializable {
     private LocalDate dateLastModification;
 
 
-    private Long assignedToId;
+    private  DealUserDTO assignedTo;
 
     private Long parentId;
 
@@ -98,12 +98,12 @@ public class DealCommentDTO implements Serializable {
         this.dateLastModification = dateLastModification;
     }
 
-    public Long getAssignedToId() {
-        return assignedToId;
+    public DealUserDTO getAssignedTo() {
+        return assignedTo;
     }
 
-    public void setAssignedToId(Long dealUserId) {
-        this.assignedToId = dealUserId;
+    public void setAssignedTo(DealUserDTO dealUser){
+        this.assignedTo = dealUser;
     }
 
     public Long getParentId() {
@@ -151,7 +151,7 @@ public class DealCommentDTO implements Serializable {
             ", like=" + getLike() +
             ", dislike=" + getDislike() +
             ", dateLastModification='" + getDateLastModification() + "'" +
-            ", assignedToId=" + getAssignedToId() +
+            ", assignedTo=" + getAssignedTo() +
             ", parentId=" + getParentId() +
             ", dealId=" + getDealId() +
             "}";

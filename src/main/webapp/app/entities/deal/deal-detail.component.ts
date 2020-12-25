@@ -14,6 +14,7 @@ export class DealDetailComponent implements OnInit {
   comments: IDealComment[] = [];
   histories: IDealHistory[] = [];
   step: String = '';
+  coms: any = [];
 
   constructor(protected activatedRoute: ActivatedRoute) {}
 
@@ -24,11 +25,20 @@ export class DealDetailComponent implements OnInit {
       if (deal.dealHistories.length > 0) this.histories = deal.dealHistories;
     });
     this.step = 'deal';
+
     this.comments.sort(function (a, b): any {
-      return a.id! < b.id! ? -1 : a.id! > b.id! ? 1 : 0;
+      return a.parentId! < b.parentId! ? -1 : a.parentId! > b.parentId! ? 1 : 0;
+    });
+    this.comments.map(element => {
+      if (element.parentId === null) {
+        this.coms[element.id!] = element;
+        this.coms[element.id!].child = [];
+      } else {
+        this.coms[element.parentId!].child!.push(element);
+      }
     });
     // eslint-disable-next-line no-console
-    console.log(this.deal);
+    console.log(this.coms);
   }
 
   previousState(): void {

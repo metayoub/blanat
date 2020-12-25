@@ -165,23 +165,44 @@
           </div>
         </div>
         <div class="container" [hidden]="step !== 'comments'">
-          <div class="row mt-2 border-bottom" *ngFor="let comment of comments">
-            <div class="col-2">
-              <img src="../../../content/images/jhipster_family_member_1.svg" alt="profile-img" class="rounded-circle">
+          <div class="container" *ngFor="let comment of coms | keyvalue">
+            <div class="row mt-2 border-bottom">
+              <div class="col-2">
+                <img src="../../../content/images/jhipster_family_member_1.svg" alt="profile-img" class="rounded-circle">
+              </div>
+              <div class="col-9">
+                  <div class="d-flex">
+                    <p class="font-weight-bold mr-auto p-2 mb-0" [routerLink]="['/deal-user', comment.value.assignedTo!.id, 'view']" >{{comment.value.assignedTo!.user!.firstName}} {{comment.value.assignedTo!.user!.lastName}}</p>
+                    <p class="p-2 mb-0">{{comment.value.dateComment | date:'shortDate'}} </p>
+                    <p class="font-italic p-2 mb-0" *ngIf="comment.value.dateLastModification!">Edited</p>
+                  </div>
+                  <div class="d-flex m-2" [routerLink]="['/deal-comment', comment.value.id, 'view']">
+                    {{comment.value.comment}}
+                  </div>
+                  <div class="d-flex m-2">
+                    <fa-icon class="mr-1" icon="thumbs-up"></fa-icon> <span>{{comment.value.like}}</span>
+                    <fa-icon class="ml-3 mr-1" icon="thumbs-down"></fa-icon> <span>{{comment.value.dislike}}</span>
+                  </div>
+              </div>
             </div>
-            <div class="col-9">
+            <div class="row ml-5 border-bottom" *ngFor="let c of comment.value.child!">
+              <div class="col-2">
+                <img src="../../../content/images/jhipster_family_member_2.svg" alt="profile-img" class="rounded-circle">
+              </div>
+              <div class="col-9">
                 <div class="d-flex">
-                  <p class="font-weight-bold mr-auto p-2 mb-0" [routerLink]="['/deal-user', comment.assignedToId, 'view']" >Robin Hood</p>
-                  <p class="p-2 mb-0">{{comment.dateComment | date:'shortDate'}} </p>
-                  <p class="font-italic p-2 mb-0" *ngIf="comment.dateLastModification!">Edited</p>
+                  <p class="font-weight-bold mr-auto p-2 mb-0" [routerLink]="['/deal-user', c.assignedTo!.id, 'view']" >{{c.assignedTo!.user!.firstName}} {{c.assignedTo!.user!.lastName}}</p>
+                  <p class="p-2 mb-0">{{c.dateComment | date:'shortDate'}} </p>
+                  <p class="font-italic p-2 mb-0" *ngIf="c.dateLastModification!">Edited</p>
                 </div>
-                <div class="d-flex m-2" [routerLink]="['/deal-comment', comment.id, 'view']">
-                  {{comment.comment}}
+                <div class="d-flex m-2" [routerLink]="['/deal-comment', c.id, 'view']">
+                  {{c.comment}}
                 </div>
                 <div class="d-flex m-2">
-                  <fa-icon class="mr-1" icon="thumbs-up"></fa-icon> <span>{{comment.like}}</span>
-                  <fa-icon class="ml-3 mr-1" icon="thumbs-down"></fa-icon> <span>{{comment.dislike}}</span>
+                  <fa-icon class="mr-1" icon="thumbs-up"></fa-icon> <span>{{c.like}}</span>
+                  <fa-icon class="ml-3 mr-1" icon="thumbs-down"></fa-icon> <span>{{c.dislike}}</span>
                 </div>
+            </div>
             </div>
           </div>
         </div>

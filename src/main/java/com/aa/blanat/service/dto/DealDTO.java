@@ -7,7 +7,6 @@ import java.util.HashSet;
 import java.util.Set;
 import com.aa.blanat.domain.enumeration.TypeDeal;
 import com.aa.blanat.domain.enumeration.TypeCoupon;
-import com.aa.blanat.domain.DealUser;
 import com.aa.blanat.domain.enumeration.StatutDeal;
 
 /**
