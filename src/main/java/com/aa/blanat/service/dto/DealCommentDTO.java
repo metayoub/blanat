@@ -1,6 +1,9 @@
 package com.aa.blanat.service.dto;
 
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.validation.constraints.*;
 import java.io.Serializable;
 
@@ -33,6 +36,8 @@ public class DealCommentDTO implements Serializable {
     private Long parentId;
 
     private Long dealId;
+
+    private Set<DealCommentDTO> dealCommentReply = new HashSet<>();
     
     public Long getId() {
         return id;
@@ -155,5 +160,13 @@ public class DealCommentDTO implements Serializable {
             ", parentId=" + getParentId() +
             ", dealId=" + getDealId() +
             "}";
+    }
+
+    public Set<DealCommentDTO> getDealCommentReply() {
+        return dealCommentReply;
+    }
+
+    public void setDealCommentReply(Set<DealCommentDTO> dealCommentReply) {
+        this.dealCommentReply = dealCommentReply;
     }
 }

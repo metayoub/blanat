@@ -3,8 +3,11 @@ package com.aa.blanat.service.dto;
 import java.time.LocalDate;
 import javax.validation.constraints.*;
 import java.io.Serializable;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
+
 import com.aa.blanat.domain.enumeration.TypeDeal;
 import com.aa.blanat.domain.enumeration.TypeCoupon;
 import com.aa.blanat.domain.enumeration.StatutDeal;
@@ -318,6 +321,21 @@ public class DealDTO implements Serializable {
     @Override
     public int hashCode() {
         return 31;
+    }
+
+    public void getLstCommentWithReply() {
+        Set<DealCommentDTO> lstDealCommentParent = this.dealComments.stream().filter(u -> u.getParentId() == null)
+        .sorted(Comparator.comparing(DealCommentDTO::getDateComment)
+                        .reversed())                
+        .collect(Collectors.toSet());
+        for (DealCommentDTO dealCommentDTO : lstDealCommentParent) {
+            dealCommentDTO.setDealCommentReply(this.dealComments.stream()
+                    .filter(u -> u.getParentId() == dealCommentDTO.getId())
+                    .sorted(Comparator.comparing(DealCommentDTO::getDateComment)
+                            .reversed())
+                    .collect(Collectors.toSet()));
+        }
+        this.dealComments = lstDealCommentParent;
     }
 
     // prettier-ignore

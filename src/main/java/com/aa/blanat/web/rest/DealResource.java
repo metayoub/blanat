@@ -2,6 +2,7 @@ package com.aa.blanat.web.rest;
 
 import com.aa.blanat.service.DealService;
 import com.aa.blanat.web.rest.errors.BadRequestAlertException;
+import com.aa.blanat.service.dto.DealCommentDTO;
 import com.aa.blanat.service.dto.DealDTO;
 import com.aa.blanat.service.dto.DealDTOList;
 
@@ -18,12 +19,15 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import com.aa.blanat.service.DealCommentService;
+import com.aa.blanat.service.DealCommentService;
 
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 /**
  * REST controller for managing {@link com.aa.blanat.domain.Deal}.
@@ -115,6 +119,7 @@ public class DealResource {
     public ResponseEntity<DealDTO> getDeal(@PathVariable Long id) {
         log.debug("REST request to get Deal : {}", id);
         Optional<DealDTO> dealDTO = dealService.findOne(id);
+        dealDTO.get().getLstCommentWithReply();
         return ResponseUtil.wrapOrNotFound(dealDTO);
     }
 
