@@ -26,19 +26,8 @@ export class DealDetailComponent implements OnInit {
     });
     this.step = 'deal';
 
-    this.comments.sort(function (a, b): any {
-      return a.parentId! < b.parentId! ? -1 : a.parentId! > b.parentId! ? 1 : 0;
-    });
-    this.comments.map(element => {
-      if (element.parentId === null) {
-        this.coms[element.id!] = element;
-        this.coms[element.id!].child = [];
-      } else {
-        this.coms[element.parentId!].child!.push(element);
-      }
-    });
     // eslint-disable-next-line no-console
-    console.log(this.coms);
+    console.log(this.deal);
   }
 
   previousState(): void {
