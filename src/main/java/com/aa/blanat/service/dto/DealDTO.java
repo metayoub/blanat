@@ -81,6 +81,10 @@ public class DealDTO implements Serializable {
     private Set<DealCommentDTO> dealComments = new HashSet<>();
 
     private Set<DealHistoryDTO> dealHistories = new HashSet<>();
+
+    private Set<DealReportDTO> dealReports = new HashSet<>();
+
+    private Set<DealTrackDTO> dealTracks = new HashSet<>();
     
     public Long getId() {
         return id;
@@ -294,7 +298,7 @@ public class DealDTO implements Serializable {
         return dealComments;
     }
 
-    public void setComments(Set<DealCommentDTO> dealComments) {
+    public void setDealComments(Set<DealCommentDTO> dealComments) {
         this.dealComments = dealComments;
     }
 
@@ -302,8 +306,24 @@ public class DealDTO implements Serializable {
         return dealHistories;
     }
 
-    public void setHistories(Set<DealHistoryDTO> dealHistories) {
+    public void setDealHistories(Set<DealHistoryDTO> dealHistories) {
         this.dealHistories = dealHistories;
+    }
+
+    public Set<DealReportDTO> getDealReports() {
+        return dealReports;
+    }
+
+    public void setDealReports(Set<DealReportDTO> dealReports) {
+        this.dealReports = dealReports;
+    }
+
+    public Set<DealTrackDTO> getDealTracks() {
+        return dealTracks;
+    }
+
+    public void setDealTracks(Set<DealTrackDTO> dealTracks) {
+        this.dealTracks = dealTracks;
     }
 
     @Override
@@ -370,6 +390,8 @@ public class DealDTO implements Serializable {
             ", dealCategories='" + getDealCategories() + "'" +
             ", dealComments='" + getDealComments() + "'" +
             ", dealHistories='" + getDealHistories() + "'" +
+            ", dealTracks='" + getDealTracks() + "'" +
+            ", dealReports='" + getDealReports() + "'" +
             "}";
     }
 }

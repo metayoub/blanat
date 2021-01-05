@@ -20,7 +20,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.aa.blanat.service.DealCommentService;
-import com.aa.blanat.service.DealCommentService;
 
 import javax.validation.Valid;
 import java.net.URI;

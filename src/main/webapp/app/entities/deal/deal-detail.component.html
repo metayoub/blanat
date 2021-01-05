@@ -225,10 +225,48 @@
           </table>
         </div>
         <div [hidden]="step !== 'report'">
-          E
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th scope="col" [hidden]="true">id</th>
+                <th scope="col" jhiTranslate="blanatApp.dealReport.reason">Reason</th>
+                <th scope="col" jhiTranslate="blanatApp.dealReport.isValid">Is Valid</th>
+                <th scope="col" jhiTranslate="blanatApp.dealReport.assignedTo">Assigned To</th>
+                <th scope="col" jhiTranslate="blanatApp.dealReport.dateReport">Date Report</th>
+                <th scope="col" jhiTranslate="blanatApp.dealReport.dateClose">Date Close</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let report of reports">
+                <th scope="row" [hidden]="true">{{report.id}}</th>
+                <td>{{report.reason}}</td>
+                <td>{{report.isValid}}</td>
+                <td>{{report.assignedTo}}</td>
+                <td>{{report.dateReport | date:'mediumDate'}}</td>
+                <td>{{report.dateClose | date:'mediumDate'}}</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
         <div [hidden]="step !== 'track'">
-          F
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th scope="col" [hidden]="true">id</th>
+                <th scope="col" jhiTranslate="blanatApp.dealTrack.ipLocalisation">Ip Localisation</th>
+                <th scope="col" jhiTranslate="blanatApp.dealTrack.localisation">localisation</th>
+                <th scope="col" jhiTranslate="blanatApp.dealTrack.isAuthentified">Is Authentified</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let track of tracks">
+                <th scope="row" [hidden]="true">{{track.id}}</th>
+                <td>{{track.ipLocalisation}}</td>
+                <td>{{track.localisation}}</td>
+                <td>{{track.isAuthentified}}</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
