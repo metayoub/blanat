@@ -79,9 +79,7 @@
             </div>
           </div>
           <div class="row mt-3">
-            <div class="col align-self-center">
-              {{ deal.description}}
-            </div>
+            <div class="col align-self-center"  [innerHTML]="deal.description"></div>
           </div>
           <div class="row">
             <div class="col-3 align-self-center border border-success m-1 rounded" *ngFor="let cat of deal.dealCategories">

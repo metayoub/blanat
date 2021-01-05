@@ -29,6 +29,17 @@ export class DealUpdateComponent implements OnInit {
   dateStartDp: any;
   dateEndDp: any;
   datePublicationDp: any;
+  editorConfig: any = {
+    toolbar: [
+      { name: 'basicstyles', items: ['Bold', 'Italic', 'Underline', 'Strike', '-', 'RemoveFormat'] },
+      { name: 'paragraph', items: ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote'] },
+      { name: 'styles', items: ['Styles', 'Format'] },
+      { name: 'links', items: ['Link', 'Unlink'] },
+      { name: 'insert', items: ['Image', 'Table', 'HorizontalRule', 'EmojiPanel'] },
+      { name: 'clipboard', items: ['Cut', 'Copy', 'Paste', '-', 'Undo', 'Redo'] },
+    ],
+    removeButtons: 'Subscript,Superscript',
+  };
 
   editForm = this.fb.group({
     id: [],
