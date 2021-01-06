@@ -1,9 +1,10 @@
-import { element, by, ElementFinder } from 'protractor';
+import { element, by, ElementFinder, browser, protractor } from 'protractor';
 
 export class DealComponentsPage {
   createButton = element(by.id('jh-create-entity'));
-  deleteButtons = element.all(by.css('jhi-deal div table .btn-danger'));
+  // deleteButtons = element.all(by.css('jhi-deal div table .btn-danger'));
   title = element.all(by.css('jhi-deal div h2#page-heading span')).first();
+  deal = element.all(by.id('jh-title-entity')).first();
   noResult = element(by.id('no-result'));
   entities = element(by.id('entities'));
 
@@ -11,29 +12,52 @@ export class DealComponentsPage {
     await this.createButton.click();
   }
 
-  async clickOnLastDeleteButton(): Promise<void> {
+  /* async clickOnLastDeleteButton(): Promise<void> {
     await this.deleteButtons.last().click();
   }
 
   async countDeleteButtons(): Promise<number> {
     return this.deleteButtons.count();
-  }
+  } */
 
   async getTitle(): Promise<string> {
     return this.title.getAttribute('jhiTranslate');
+  }
+
+  async getDeal(): Promise<void> {
+    this.deal.click();
+  }
+
+  async getDealTitle(): Promise<string> {
+    return this.deal.getText();
+  }
+}
+
+export class DealViewPage {
+  cancelButton = element(by.id('cancel-save'));
+  deal = element.all(by.id('jh-title-entity')).first();
+
+  async getDeal(): Promise<string> {
+    return this.deal.getText();
+  }
+
+  async cancel(): Promise<void> {
+    await this.cancelButton.click();
   }
 }
 
 export class DealUpdatePage {
   pageTitle = element(by.id('jhi-deal-heading'));
+
   saveButton = element(by.id('save-entity'));
   cancelButton = element(by.id('cancel-save'));
 
   titleInput = element(by.id('field_title'));
   descriptionInput = element(by.id('field_description'));
+  descriptionEditor = element(by.css('.cke_editable'));
   typeSelect = element(by.id('field_type'));
   urlInput = element(by.id('field_url'));
-  imageInput = element(by.id('field_image'));
+  // imageInput = element(by.id('field_image'));
   priceInput = element(by.id('field_price'));
   priceNormalInput = element(by.id('field_priceNormal'));
   priceShippingInput = element(by.id('field_priceShipping'));
@@ -44,9 +68,9 @@ export class DealUpdatePage {
   dateStartInput = element(by.id('field_dateStart'));
   dateEndInput = element(by.id('field_dateEnd'));
   datePublicationInput = element(by.id('field_datePublication'));
-  viewsInput = element(by.id('field_views'));
-  likeInput = element(by.id('field_like'));
-  dislikeInput = element(by.id('field_dislike'));
+  // viewsInput = element(by.id('field_views'));
+  // likeInput = element(by.id('field_like'));
+  // dislikeInput = element(by.id('field_dislike'));
   localInput = element(by.id('field_local'));
   statutSelect = element(by.id('field_statut'));
   isDeletedInput = element(by.id('field_isDeleted'));
@@ -54,7 +78,7 @@ export class DealUpdatePage {
 
   dealLocationSelect = element(by.id('field_dealLocation'));
   assignedToSelect = element(by.id('field_assignedTo'));
-  dealCategorySelect = element(by.id('field_dealCategory'));
+  dealCategorySelect = element(by.id('field_dealCategories'));
 
   async getPageTitle(): Promise<string> {
     return this.pageTitle.getAttribute('jhiTranslate');
@@ -69,11 +93,30 @@ export class DealUpdatePage {
   }
 
   async setDescriptionInput(description: string): Promise<void> {
-    await this.descriptionInput.sendKeys(description);
+    await this.descriptionInput.click();
+    await browser.switchTo().frame(element(by.tagName('iframe')).getWebElement());
+    await browser.waitForAngularEnabled(false);
+    await browser.wait(protractor.ExpectedConditions.presenceOf(this.descriptionEditor));
+    await this.descriptionEditor.sendKeys(description);
+    await browser.switchTo().defaultContent();
+    await browser.waitForAngularEnabled(true);
+  }
+
+  async editorStart(): Promise<string> {
+    await this.descriptionInput.click();
+    await browser.switchTo().frame(element(by.tagName('iframe')).getWebElement());
+    await browser.waitForAngularEnabled(false);
+    await browser.wait(protractor.ExpectedConditions.presenceOf(this.descriptionEditor));
+    await this.descriptionEditor.sendKeys('editor');
+    return await this.descriptionEditor.getAttribute('innerHTML');
   }
 
   async getDescriptionInput(): Promise<string> {
-    return await this.descriptionInput.getAttribute('value');
+    await this.descriptionInput.click();
+    await browser.switchTo().frame(element(by.tagName('iframe')).getWebElement());
+    await browser.waitForAngularEnabled(false);
+    await browser.wait(protractor.ExpectedConditions.presenceOf(this.descriptionEditor));
+    return await this.descriptionEditor.getAttribute('innerHTML');
   }
 
   async setTypeSelect(type: string): Promise<void> {
@@ -88,6 +131,14 @@ export class DealUpdatePage {
     await this.typeSelect.all(by.tagName('option')).last().click();
   }
 
+  async typeSelectFirstOption(): Promise<void> {
+    await this.typeSelect.all(by.tagName('option')).first().click();
+    await browser.wait(protractor.ExpectedConditions.visibilityOf(this.priceInput));
+    await this.setPriceInput('5');
+    await this.setPriceNormalInput('5');
+    await this.setPriceShippingInput('5');
+  }
+
   async setUrlInput(url: string): Promise<void> {
     await this.urlInput.sendKeys(url);
   }
@@ -96,13 +147,13 @@ export class DealUpdatePage {
     return await this.urlInput.getAttribute('value');
   }
 
-  async setImageInput(image: string): Promise<void> {
+  /* async setImageInput(image: string): Promise<void> {
     await this.imageInput.sendKeys(image);
   }
 
   async getImageInput(): Promise<string> {
     return await this.imageInput.getAttribute('value');
-  }
+  } */
 
   async setPriceInput(price: string): Promise<void> {
     await this.priceInput.sendKeys(price);
@@ -188,29 +239,29 @@ export class DealUpdatePage {
     return await this.datePublicationInput.getAttribute('value');
   }
 
-  async setViewsInput(views: string): Promise<void> {
+  /* async setViewsInput(views: string): Promise<void> {
     await this.viewsInput.sendKeys(views);
   }
 
   async getViewsInput(): Promise<string> {
     return await this.viewsInput.getAttribute('value');
-  }
+  } */
 
-  async setLikeInput(like: string): Promise<void> {
+  /* async setLikeInput(like: string): Promise<void> {
     await this.likeInput.sendKeys(like);
   }
 
   async getLikeInput(): Promise<string> {
     return await this.likeInput.getAttribute('value');
-  }
+  }*/
 
-  async setDislikeInput(dislike: string): Promise<void> {
+  /* async setDislikeInput(dislike: string): Promise<void> {
     await this.dislikeInput.sendKeys(dislike);
   }
 
   async getDislikeInput(): Promise<string> {
     return await this.dislikeInput.getAttribute('value');
-  }
+  } */
 
   getLocalInput(): ElementFinder {
     return this.localInput;
@@ -230,6 +281,10 @@ export class DealUpdatePage {
 
   getIsDeletedInput(): ElementFinder {
     return this.isDeletedInput;
+  }
+
+  async setIsDeletedInput(): Promise<void> {
+    await this.isDeletedInput.click();
   }
 
   getIsBlockedInput(): ElementFinder {

@@ -31,9 +31,6 @@ export class DealDetailComponent implements OnInit {
       if (deal.dealTracks?.length > 0) this.tracks = deal.dealTracks;
     });
     this.step = 'deal';
-
-    // eslint-disable-next-line no-console
-    console.log(this.deal);
   }
 
   previousState(): void {

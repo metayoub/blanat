@@ -3,7 +3,7 @@
       <div class="card-body">
         <div class="row mb-3">
           <div class="col">
-              <button type="submit"
+              <button type="submit" id="cancel-save"
                       (click)="previousState()"
                       class="btn btn-info">
                   <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
@@ -35,7 +35,7 @@
             <div class="col align-self-center">
               <div class="row">
                 <div class="col-9">
-                  <p class="font-weight-bold m-0">{{ deal.title }}</p>
+                  <p id="jh-title-entity" class="font-weight-bold m-0">{{ deal.title }}</p>
                   <p class="text-left pl-1">
                     <span class="font-weight-bold text-danger" *ngIf="deal.type=='DEAL'">
                       {{ deal.price }}Dhs
@@ -241,7 +241,7 @@
                 <th scope="row" [hidden]="true">{{report.id}}</th>
                 <td>{{report.reason}}</td>
                 <td>{{report.isValid}}</td>
-                <td>{{report.assignedTo}}</td>
+                <td>{{report.assignedToId}}</td>
                 <td>{{report.dateReport | date:'mediumDate'}}</td>
                 <td>{{report.dateClose | date:'mediumDate'}}</td>
               </tr>
