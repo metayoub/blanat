@@ -1,4 +1,4 @@
-import { browser, ExpectedConditions as ec /* , promise */, WebElement } from 'protractor';
+import { browser, ExpectedConditions as ec /* , promise */ } from 'protractor';
 import { NavBarPage, SignInPage } from '../../page-objects/jhi-page-objects';
 
 import {
@@ -17,7 +17,6 @@ describe('Deal e2e test', () => {
   let dealUpdatePage: DealUpdatePage;
   let dealViewPage: DealViewPage;
   /* let dealDeleteDialog: DealDeleteDialog; */
-  let editable: WebElement;
 
   before(async () => {
     await browser.get('/');
@@ -72,8 +71,8 @@ describe('Deal e2e test', () => {
       dealUpdatePage.setDateStartInput('2020-12-31'),
       dealUpdatePage.setDateEndInput('2021-12-31'),
       dealUpdatePage.typeSelectFirstOption(),
-      //dealUpdatePage.typeSelectLastOption(),
-      /*dealUpdatePage.setPriceInput('5'),
+      // dealUpdatePage.typeSelectLastOption(),
+      /* dealUpdatePage.setPriceInput('5'),
           dealUpdatePage.setPriceNormalInput('5'),
           dealUpdatePage.setPriceShippingInput('5'),
           dealUpdatePage.dealCategorySelectLastOption(),*/

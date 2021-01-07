@@ -25,11 +25,11 @@ export class DealComponentsPage {
   }
 
   async getDeal(): Promise<void> {
-    this.deal.click();
+    await this.deal.click();
   }
 
   async getDealTitle(): Promise<string> {
-    return this.deal.getText();
+    return await this.deal.getText();
   }
 }
 
