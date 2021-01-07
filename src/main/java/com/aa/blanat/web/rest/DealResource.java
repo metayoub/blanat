@@ -118,7 +118,7 @@ public class DealResource {
     public ResponseEntity<DealDTO> getDeal(@PathVariable Long id) {
         log.debug("REST request to get Deal : {}", id);
         Optional<DealDTO> dealDTO = dealService.findOne(id);
-        dealDTO.get().getLstCommentWithReply();
+        if(dealDTO.isPresent()) dealDTO.get().getLstCommentWithReply();
         return ResponseUtil.wrapOrNotFound(dealDTO);
     }
 
