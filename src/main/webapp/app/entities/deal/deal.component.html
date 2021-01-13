@@ -46,8 +46,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col">
-                            {{ deal.description | description}}
+                        <div class="col" [innerHTML]="deal.description | description">
                         </div>
                     </div>
                 </div>

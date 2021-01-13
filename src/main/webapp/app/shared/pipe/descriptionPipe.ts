@@ -8,7 +8,7 @@ export class DescriptionPipe implements PipeTransform {
     if (args === 'all' || value.length < 420) {
       return value;
     } else {
-      return value.slice(1, 420) + ' ...';
+      return value.slice(0, 350) + ' <strong>...</strong>';
     }
   }
 }
