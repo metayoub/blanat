@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { HttpResponse } from '@angular/common/http';
 import { FormBuilder } from '@angular/forms';
 
 import { IDealCategory } from 'app/shared/model/deal-category.model';
+import { DealCategoryService } from './deal-category.service';
 
 @Component({
   selector: 'jhi-deal-category-detail',
@@ -10,6 +12,7 @@ import { IDealCategory } from 'app/shared/model/deal-category.model';
 })
 export class DealCategoryDetailComponent implements OnInit {
   dealCategory: IDealCategory | null = null;
+  dealcategories: IDealCategory[] = [];
   editForm = this.fb.group({
     id: [],
     name: [],
@@ -18,11 +21,14 @@ export class DealCategoryDetailComponent implements OnInit {
     categoryId: [],
   });
 
-  constructor(protected activatedRoute: ActivatedRoute, private fb: FormBuilder) {}
+  constructor(protected dealCategoryService: DealCategoryService, protected activatedRoute: ActivatedRoute, private fb: FormBuilder) {}
 
   ngOnInit(): void {
     this.editForm.disable();
     this.activatedRoute.data.subscribe(({ dealCategory }) => this.updateForm(dealCategory));
+    this.dealCategoryService.find(this.editForm.get('categoryId')!.value).subscribe((res: HttpResponse<IDealCategory>) => {
+      this.editForm.patchValue({ categoryId: res.body!.name || '' });
+    });
   }
 
   updateForm(dealCategory: IDealCategory): void {
