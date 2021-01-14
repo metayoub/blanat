@@ -1,44 +1,63 @@
 <div class="row justify-content-center">
-    <div class="col-8">
-        <div *ngIf="dealCategory">
-            <h2><span jhiTranslate="blanatApp.dealCategory.detail.title">Deal Category</span> {{ dealCategory.id }}</h2>
-
-            <hr>
-
-            <jhi-alert-error></jhi-alert-error>
-
-            <dl class="row-md jh-entity-details">
-                <dt><span jhiTranslate="blanatApp.dealCategory.name">Name</span></dt>
-                <dd>
-                    <span>{{ dealCategory.name }}</span>
-                </dd>
-                <dt><span jhiTranslate="blanatApp.dealCategory.description">Description</span></dt>
-                <dd>
-                    <span>{{ dealCategory.description }}</span>
-                </dd>
-                <dt><span jhiTranslate="blanatApp.dealCategory.isParent">Is Parent</span></dt>
-                <dd>
-                    <span>{{ dealCategory.isParent }}</span>
-                </dd>
-                <dt><span jhiTranslate="blanatApp.dealCategory.category">Category</span></dt>
-                <dd>
-                    <div *ngIf="dealCategory.categoryId">
-                        <a [routerLink]="['/deal-category', dealCategory.categoryId, 'view']">{{ dealCategory.categoryName }}</a>
+    <div class="col-8" *ngIf="editForm.get('id')!.value">
+        <div class="card">
+            <form name="editForm" role="form" novalidate [formGroup]="editForm" disabled>
+                <div class="card-header">
+                    <h2><span id="jhi-deal-category-heading" jhiTranslate="blanatApp.dealCategory.detail.title">Deal Category</span> {{ editForm.get('id')!.value }}</h2>
+                </div>
+            
+                <div class="card-body">
+                    <div>
+                        <jhi-alert-error></jhi-alert-error>
+                        <div class="form-group">
+                            <label for="id" jhiTranslate="global.field.id">ID</label>
+                            <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                        </div>
                     </div>
-                </dd>
-            </dl>
+                    
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="blanatApp.dealCategory.name" for="field_name">Name</label>
+                        <input type="text" class="form-control" name="name" id="field_name"
+                               formControlName="name"/>
+                    </div>
 
-            <button type="submit"
-                    (click)="previousState()"
-                    class="btn btn-info">
-                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
-            </button>
-
-            <button type="button"
-                    [routerLink]="['/deal-category', dealCategory.id, 'edit']"
-                    class="btn btn-primary">
-                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
-            </button>
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="blanatApp.dealCategory.description" for="field_description">Description</label>
+                        <textarea type="text" class="form-control" name="description" id="field_description"
+                               formControlName="description"></textarea>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col col-md-2 my-auto">
+                            <div class="form-group my-auto">
+                                <div class="custom-control custom-switch">
+                                    <input type="checkbox" class="custom-control-input" id="isParent" checked="" formControlName="isParent">
+                                    <label class="custom-control-label" for="isParent" jhiTranslate="blanatApp.dealCategory.isParent">Is Parent</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col col-md-10 my-auto" [hidden]="!editForm.get('isParent')!.value">
+                            <div class="form-group">
+                                <label class="form-control-label" jhiTranslate="blanatApp.dealCategory.category" for="field_category">Category</label>
+                                <input type="text" class="form-control" name="category" id="field_category"
+                                    formControlName="categoryId"/>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row justify-content-end">
+                        <div class="col align-self-end col-auto">
+                            <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                                <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                            </button>
+            
+                            <button id="edit-entity" class="btn btn-primary" [routerLink]="['/deal-category', editForm.get('id')!.value, 'edit']">
+                                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
 </div>

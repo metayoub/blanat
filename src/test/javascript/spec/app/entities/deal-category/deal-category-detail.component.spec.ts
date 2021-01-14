@@ -26,11 +26,13 @@ describe('Component Tests', () => {
 
     describe('OnInit', () => {
       it('Should load dealCategory on init', () => {
+        spyOn(comp, 'ngOnInit');
         // WHEN
         comp.ngOnInit();
 
         // THEN
-        expect(comp.dealCategory).toEqual(jasmine.objectContaining({ id: 123 }));
+        expect(comp.updateForm).toHaveBeenCalled();
+        expect(comp.editForm.disable).toEqual(true);
       });
     });
   });

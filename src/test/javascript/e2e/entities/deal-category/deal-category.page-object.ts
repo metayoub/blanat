@@ -2,6 +2,7 @@ import { element, by, ElementFinder } from 'protractor';
 
 export class DealCategoryComponentsPage {
   createButton = element(by.id('jh-create-entity'));
+  editButton = element(by.id('jh-show-entity'));
   deleteButtons = element.all(by.css('jhi-deal-category div table .btn-danger'));
   title = element.all(by.css('jhi-deal-category div h2#page-heading span')).first();
   noResult = element(by.id('no-result'));
@@ -9,6 +10,10 @@ export class DealCategoryComponentsPage {
 
   async clickOnCreateButton(): Promise<void> {
     await this.createButton.click();
+  }
+
+  async clickOnEditButton(): Promise<void> {
+    await this.editButton.click();
   }
 
   async clickOnLastDeleteButton(): Promise<void> {
@@ -98,5 +103,39 @@ export class DealCategoryDeleteDialog {
 
   async clickOnConfirmButton(): Promise<void> {
     await this.confirmButton.click();
+  }
+}
+
+export class DealCategoryViewPage {
+  editButton = element(by.id('edit-entity'));
+  cancelButtons = element(by.id('cancel-save'));
+
+  idInput = element(by.id('id'));
+  nameInput = element(by.id('field_name'));
+  descriptionInput = element(by.id('field_description'));
+  pageTitle = element(by.id('jhi-deal-category-heading'));
+
+  async getPageTitle(): Promise<string> {
+    return this.pageTitle.getAttribute('jhiTranslate');
+  }
+
+  async getNameInput(): Promise<string> {
+    return await this.nameInput.getAttribute('value');
+  }
+
+  async getDescriptionInput(): Promise<string> {
+    return await this.descriptionInput.getAttribute('value');
+  }
+
+  async getIDInput(): Promise<string> {
+    return await this.idInput.getAttribute('value');
+  }
+
+  async clickOnEditButton(): Promise<void> {
+    await this.editButton.click();
+  }
+
+  async clickOnCancelButton(): Promise<void> {
+    await this.cancelButtons.click();
   }
 }
