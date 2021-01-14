@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
+import { FormBuilder } from '@angular/forms';
 import { of } from 'rxjs';
 
 import { BlanatTestModule } from '../../../test.module';
@@ -16,7 +17,7 @@ describe('Component Tests', () => {
       TestBed.configureTestingModule({
         imports: [BlanatTestModule],
         declarations: [DealCategoryDetailComponent],
-        providers: [{ provide: ActivatedRoute, useValue: route }],
+        providers: [FormBuilder, { provide: ActivatedRoute, useValue: route }],
       })
         .overrideTemplate(DealCategoryDetailComponent, '')
         .compileComponents();
@@ -26,13 +27,12 @@ describe('Component Tests', () => {
 
     describe('OnInit', () => {
       it('Should load dealCategory on init', () => {
-        spyOn(comp, 'ngOnInit');
+        spyOn(comp, 'updateForm');
         // WHEN
         comp.ngOnInit();
 
         // THEN
         expect(comp.updateForm).toHaveBeenCalled();
-        expect(comp.editForm.disable).toEqual(true);
       });
     });
   });

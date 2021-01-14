@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
-import { HttpResponse } from '@angular/common/http';
+import { HttpHeaders, HttpResponse } from '@angular/common/http';
 import { FormBuilder } from '@angular/forms';
 import { of } from 'rxjs';
 
@@ -26,6 +26,30 @@ describe('Component Tests', () => {
       fixture = TestBed.createComponent(DealCategoryUpdateComponent);
       comp = fixture.componentInstance;
       service = fixture.debugElement.injector.get(DealCategoryService);
+    });
+
+    describe('init', () => {
+      it('should call dealCategoryService on init', fakeAsync(() => {
+        // Start
+        const headers = new HttpHeaders().append('link', 'link;link');
+        spyOn(service, 'query').and.returnValue(
+          of(
+            new HttpResponse({
+              body: [new DealCategory(123)],
+              headers,
+            })
+          )
+        );
+        spyOn(comp, 'updateForm');
+        // WHEN
+        comp.ngOnInit();
+        tick();
+
+        // THEN
+        expect(comp.updateForm).toBeCalled();
+        expect(service.query).toHaveBeenCalled();
+        expect(comp.dealcategories && comp.dealcategories[0]).toEqual(jasmine.objectContaining({ id: 123 }));
+      }));
     });
 
     describe('save', () => {

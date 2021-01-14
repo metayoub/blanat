@@ -29,7 +29,6 @@ export class DealCategoryUpdateComponent implements OnInit {
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ dealCategory }) => {
       this.updateForm(dealCategory);
-
       this.dealCategoryService.query().subscribe((res: HttpResponse<IDealCategory[]>) => (this.dealcategories = res.body || []));
     });
   }
