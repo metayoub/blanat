@@ -23,6 +23,7 @@ export class DealComponent implements OnInit, OnDestroy {
   page: number;
   predicate: string;
   ascending: boolean;
+  closed: boolean;
   hasNextPage = true;
 
   constructor(
@@ -39,6 +40,7 @@ export class DealComponent implements OnInit, OnDestroy {
     };
     this.predicate = 'id';
     this.ascending = false;
+    this.closed = true;
   }
 
   loadAll(): void {

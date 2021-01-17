@@ -38,6 +38,7 @@ import {
   faReply,
   faThumbsDown,
   faThumbsUp,
+  faFilter,
   // jhipster-needle-add-icon-import
 } from '@fortawesome/free-solid-svg-icons';
 
@@ -81,5 +82,6 @@ export const fontAwesomeIcons = [
   faReply,
   faThumbsDown,
   faThumbsUp,
+  faFilter,
   // jhipster-needle-add-icon-import
 ];

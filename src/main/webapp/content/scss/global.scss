@@ -171,3 +171,59 @@ ui bootstrap tweaks
 }
 
 /* jhipster-needle-scss-add-main JHipster will add new css style */
+
+/* ==========================================================================
+ui voilet
+========================================================================== */
+.btn-volet {
+  background: $cyan;
+  color: $gray-200;
+  border-width: 0;
+  right: 380px;
+  border-bottom-left-radius: 8px;
+  border-top-left-radius: 8px;
+  box-shadow: -3px 6px 9px $gray-600;
+  outline: 0 !important;
+  height: 60px;
+  width: 20px;
+  top: 105px;
+  position: fixed;
+  transition: right 0.5s ease-in;
+  font-size: 13px;
+  &.closed {
+    right: 0px;
+  }
+}
+
+.volet {
+  position: fixed;
+  background: $white;
+  top: 65px;
+  bottom: 0;
+  right: 0;
+  width: 380px;
+  transition: right 0.5s ease-in;
+  z-index: 1000;
+  margin-bottom: 1px;
+  border-left: solid 3px $cyan;
+  overflow: auto;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  &.closed {
+    right: -380px;
+  }
+
+  &.volet-deal {
+    padding: 10px;
+  }
+  .div-volet {
+    padding: 0;
+    position: relative;
+
+    h4 {
+      margin-bottom: 15px;
+      padding-left: 0;
+    }
+  }
+}

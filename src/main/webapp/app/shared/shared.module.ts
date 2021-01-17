@@ -7,6 +7,7 @@ import { LoginModalComponent } from './login/login.component';
 import { HasAnyAuthorityDirective } from './auth/has-any-authority.directive';
 import { DescriptionPipe } from './pipe/descriptionPipe';
 import { UserNamePipe } from './pipe/userNamePipe';
+import { VoletComponent } from './volet/volet.component';
 
 @NgModule({
   imports: [BlanatSharedLibsModule],
@@ -18,6 +19,7 @@ import { UserNamePipe } from './pipe/userNamePipe';
     HasAnyAuthorityDirective,
     DescriptionPipe,
     UserNamePipe,
+    VoletComponent,
   ],
   entryComponents: [LoginModalComponent],
   exports: [
@@ -29,6 +31,7 @@ import { UserNamePipe } from './pipe/userNamePipe';
     HasAnyAuthorityDirective,
     DescriptionPipe,
     UserNamePipe,
+    VoletComponent,
   ],
 })
 export class BlanatSharedModule {}

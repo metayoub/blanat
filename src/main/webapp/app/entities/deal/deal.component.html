@@ -76,3 +76,18 @@
         </div>
     </div>
 </div>
+
+<button class="btn-volet" [ngClass]="{'closed': closed}" (click)="closed=!closed">
+    <fa-icon icon="filter"></fa-icon>
+</button>
+<div class="volet volet-deal" [ngClass]="{'closed': closed}">
+    <div class="row" *ngIf="!closed">
+        <div class="col-md-12 col-sm-12">
+            <div class="div-volet">
+                <h4>Filtre</h4>
+                <hr>
+                <jhi-volet></jhi-volet>
+            </div>
+        </div>
+    </div>
+</div>
