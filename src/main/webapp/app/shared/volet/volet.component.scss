@@ -1,0 +1,94 @@
+@import '~bootswatch/dist/lumen/variables';
+
+/* ==========================================================================
+ui voilet
+========================================================================== */
+.btn-volet {
+  background: $cyan;
+  color: $gray-200;
+  border-width: 0;
+  right: 300px;
+  border-bottom-left-radius: 8px;
+  border-top-left-radius: 8px;
+  box-shadow: -3px 6px 9px $gray-600;
+  outline: 0 !important;
+  height: 60px;
+  width: 20px;
+  top: 105px;
+  position: fixed;
+  transition: right 0.5s ease-in;
+  font-size: 13px;
+  z-index: 10;
+  &.closed {
+    right: 0px;
+  }
+}
+
+.volet {
+  position: fixed;
+  background: $white;
+  top: 65px;
+  bottom: 0;
+  right: 0;
+  width: 300px;
+  transition: right 0.5s ease-in;
+  z-index: 1000;
+  margin-bottom: 1px;
+  border-left: solid 3px $cyan;
+  border-top: solid 3px $cyan;
+  overflow: auto;
+  &.closed {
+    right: -300px;
+  }
+
+  &.volet-deal {
+    padding: 10px;
+  }
+  .div-volet {
+    padding: 0;
+    position: relative;
+
+    h4 {
+      margin-bottom: 15px;
+      padding-left: 0;
+    }
+  }
+}
+
+input.input-default {
+  font-size: 16px;
+  border: 1px solid $gray-400;
+  padding: 5px 20px;
+  &:focus {
+    outline: 0;
+    border: 1px solid $blue;
+  }
+}
+
+input[type='checkbox']:checked + label {
+  background: $success;
+}
+
+.input-label {
+  margin: 10px 0px 5px;
+}
+
+select {
+  width: 84%;
+  font-size: 16px;
+  line-height: 1.5;
+  border: 1px solid $gray-400;
+  cursor: pointer;
+  padding: 6px 20px;
+
+  &:focus {
+    outline: 0;
+    border: 1px solid $blue;
+  }
+}
+
+input[type='date'] {
+  width: 84%;
+  border: 1px solid $gray-400;
+  cursor: pointer;
+}

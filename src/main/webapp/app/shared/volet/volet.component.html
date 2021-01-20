@@ -1,1 +1,53 @@
-<p>volet works!</p>
+<button class="btn-volet" [ngClass]="{'closed': closed}" (click)="closed=!closed">
+    <fa-icon icon="filter"></fa-icon>
+</button>
+<div class="volet volet-deal" [ngClass]="{'closed': closed}">
+    <div class="row" *ngIf="!closed">
+        <div class="col-md-12 col-sm-12">
+            <div class="div-volet">
+                <h4>Filtre {{ name }}</h4>
+                <hr>
+                <form (ngSubmit)="onSubmit()" [formGroup]="myForm">
+                    <div *ngIf="filter!.length > 0">
+                        <div *ngFor="let elem of filter">
+                            <div [ngSwitch]="elem.type">
+                                <div *ngSwitchCase="'text'">
+                                    <div class="input-label">{{elem.title}}</div>
+                                    <input class="input-default" type="text" formControlName="{{elem.name}}" placeholder="{{elem.title}}"/>
+                                </div>
+                                <div *ngSwitchCase="'num'">
+                                    <div class="input-label">{{elem.title}}</div>
+                                    <input class="input-default" type="number" formControlName="{{elem.name}}" placeholder="0"/>
+                                </div>
+                                <div *ngSwitchCase="'date'">
+                                    <div class="input-label">{{elem.title}}</div>
+                                    <input class="input-default date-picker" type="date" formControlName="{{elem.name}}"/>
+                                </div>
+                                <div *ngSwitchCase="'checkbox'">
+                                    <div class="input-label">{{elem.title}}</div>
+                                    <input type="checkbox" formControlName="{{elem.name}}"/>
+                                </div>
+                                <div *ngSwitchCase="'select'">
+                                    <div class="input-label">{{elem.title}}</div>
+                                    <select class="select-default" formControlName="{{elem.name}}" *ngIf="elem.enum === 'StatutDeal'">
+                                        <option value="ACTIVE">{{ 'blanatApp.StatutDeal.ACTIVE' | translate }}</option>
+                                        <option value="HIDDEN">{{ 'blanatApp.StatutDeal.HIDDEN' | translate }}</option>
+                                        <option value="EXPIRED">{{ 'blanatApp.StatutDeal.EXPIRED' | translate }}</option>
+                                        <option value="PENDING">{{ 'blanatApp.StatutDeal.PENDING' | translate }}</option>
+                                    </select>
+                                    <select formControlName="{{elem.name}}" *ngIf="elem.enum === 'TypeDeal'">
+                                        <option value="DEAL">{{ 'blanatApp.TypeDeal.DEAL' | translate }}</option>
+                                        <option value="COUPON">{{ 'blanatApp.TypeDeal.COUPON' | translate }}</option>
+                                    </select>
+                                </div>
+                                <div *ngSwitchCase="'list'">
+                                    <p>{{elem.name}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
