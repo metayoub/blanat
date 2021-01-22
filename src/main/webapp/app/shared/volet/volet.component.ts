@@ -7,14 +7,13 @@ import { FormControl, FormGroup } from '@angular/forms';
   styleUrls: ['./volet.component.scss'],
 })
 export class VoletComponent implements OnInit {
-  @Input() public closed: boolean;
+  @Input() public closed = false;
   @Input() public name: string;
   @Input() public filter: Array<any>;
   @Output() public onFilter: EventEmitter<any>;
 
   myForm: FormGroup;
   constructor() {
-    this.closed = true;
     this.name = '';
     this.onFilter = new EventEmitter();
     this.filter = [];
@@ -55,7 +54,11 @@ export class VoletComponent implements OnInit {
   }
 
   onSubmit(): void {
-    // eslint-disable-next-line no-console
-    console.log('filtre', this.myForm);
+    this.onFilter.emit(this.myForm.value);
+    this.closed = !this.closed;
+  }
+
+  resetForm(): void {
+    this.myForm.reset();
   }
 }

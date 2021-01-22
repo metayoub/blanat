@@ -121,3 +121,13 @@ div.input-group {
     color: $white;
   }
 }
+
+.filter-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 5%;
+
+  button {
+    width: calc(50% - 5px);
+  }
+}
