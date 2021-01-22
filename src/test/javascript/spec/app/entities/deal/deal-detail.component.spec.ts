@@ -33,5 +33,43 @@ describe('Component Tests', () => {
         expect(comp.deal).toEqual(jasmine.objectContaining({ id: 123 }));
       });
     });
+
+    describe('Navigate', () => {
+      it('Should go to deal', () => {
+        const step = 'deal';
+        comp.goToDeal();
+        expect(comp.step).toEqual(step);
+      });
+
+      it('Should go to user', () => {
+        const step = 'user';
+        comp.goToUser();
+        expect(comp.step).toEqual(step);
+      });
+
+      it('Should go to comments', () => {
+        const step = 'comments';
+        comp.goToComments();
+        expect(comp.step).toEqual(step);
+      });
+
+      it('Should go to history', () => {
+        const step = 'history';
+        comp.goToHistory();
+        expect(comp.step).toEqual(step);
+      });
+
+      it('Should go to report', () => {
+        const step = 'report';
+        comp.goToReport();
+        expect(comp.step).toEqual(step);
+      });
+
+      it('Should go to track', () => {
+        const step = 'track';
+        comp.goToTrack();
+        expect(comp.step).toEqual(step);
+      });
+    });
   });
 });

@@ -1,13 +1,11 @@
-import { ComponentFixture, TestBed, async, inject, fakeAsync, tick } from '@angular/core/testing';
+import { ComponentFixture, TestBed, async, fakeAsync, tick } from '@angular/core/testing';
 import { VoletComponent } from 'app/shared/volet/volet.component';
-import { MockRouter } from '../../../helpers/mock-route.service';
 import { BlanatTestModule } from '../../../test.module';
 
 fdescribe('Component Tests', () => {
   describe('VoletComponent', () => {
     let comp: VoletComponent;
     let fixture: ComponentFixture<VoletComponent>;
-    let mockRouter: MockRouter;
 
     beforeEach(async(() => {
       TestBed.configureTestingModule({
@@ -20,16 +18,6 @@ fdescribe('Component Tests', () => {
 
       fixture = TestBed.createComponent(VoletComponent);
       comp = fixture.componentInstance;
-    }));
-
-    it('updateFiltre should Been called on init', fakeAsync(() => {
-      comp.filter = [{ label: 'title', name: 'title', type: 'text', initValue: 'title' }];
-      spyOn(comp, 'updateFiltre');
-      // WHEN
-      comp.ngOnInit();
-      tick();
-      // THEN
-      expect(comp.updateFiltre).toBeCalled();
     }));
 
     it('updateFiltre should Been called with text input', fakeAsync(() => {

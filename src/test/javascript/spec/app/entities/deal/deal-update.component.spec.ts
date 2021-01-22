@@ -150,6 +150,16 @@ describe('Component Tests', () => {
         expect(service.create).toHaveBeenCalledWith(entity);
         expect(comp.isSaving).toEqual(false);
       }));
+
+      it('Should select an IDealCategory', () => {
+        const selectedVals: DealCategory[] = [
+          { id: 123, name: 'cat1' },
+          { id: 456, name: 'cat2' },
+        ];
+        const option: DealCategory = { id: 123, name: 'cat1' };
+
+        expect(comp.getSelected(selectedVals, option)).toEqual(option);
+      });
     });
   });
 });
