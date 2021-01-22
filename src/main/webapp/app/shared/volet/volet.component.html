@@ -12,32 +12,39 @@
                         <div *ngFor="let elem of filter">
                             <div [ngSwitch]="elem.type">
                                 <div *ngSwitchCase="'text'">
-                                    <div class="input-label">{{elem.title}}</div>
-                                    <input class="input-default" type="text" formControlName="{{elem.name}}" placeholder="{{elem.title}}"/>
+                                    <div class="input-label">Recherche par {{elem.label}}</div>
+                                    <input class="input-default" type="text" formControlName="{{elem.name}}" placeholder="{{elem.initValue}}"/>
                                 </div>
                                 <div *ngSwitchCase="'num'">
-                                    <div class="input-label">{{elem.title}}</div>
-                                    <input class="input-default" type="number" formControlName="{{elem.name}}" placeholder="0"/>
+                                    <div class="input-label">Recherche par {{elem.label}}</div>
+                                    <input *ngIf="elem.isMin" class="input-default" type="number" formControlName="{{elem.nameMin}}" placeholder="{{elem.initValueMin}}"/>
+                                    <input *ngIf="elem.isMax" class="input-default" type="number" formControlName="{{elem.nameMax}}" placeholder="{{elem.initValueMax}}"/>
                                 </div>
                                 <div *ngSwitchCase="'date'">
-                                    <div class="input-label">{{elem.title}}</div>
-                                    <input class="input-default date-picker" type="date" formControlName="{{elem.name}}"/>
+                                    <div class="input-label">Recherche par {{elem.label}}</div>
+                                    <div *ngIf="elem.isMax" class="input-group">
+                                        <div class="date-label">Du</div>
+                                        <input type="text" class="input-default date-picker" name="{{elem.label}}" ngbDatepicker #dateDp="ngbDatepicker" formControlName="{{elem.nameMax}}"/>
+                                        <span class="input-group-append">
+                                            <button type="button" class="btn btn-secondary" (click)="dateDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+                                        </span>
+                                    </div>
+                                    <div *ngIf="elem.isMin" class="input-group">
+                                        <div class="date-label">Au</div>
+                                        <input type="text" class="input-default date-picker" name="{{elem.label}}" ngbDatepicker #dateDpMin="ngbDatepicker" formControlName="{{elem.nameMin}}"/>
+                                        <span class="input-group-append">
+                                            <button type="button" class="btn btn-secondary" (click)="dateDpMin.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+                                        </span>
+                                    </div>
                                 </div>
-                                <div *ngSwitchCase="'checkbox'">
-                                    <div class="input-label">{{elem.title}}</div>
-                                    <input type="checkbox" formControlName="{{elem.name}}"/>
+                                <div *ngSwitchCase="'checkbox'" class="btn-checkbox">
+                                    <input id="{{elem.name}}" type="checkbox" formControlName="{{elem.name}}"/>
+                                    <label class="input-label" for="{{elem.name}}">{{elem.label}}</label>
                                 </div>
                                 <div *ngSwitchCase="'select'">
-                                    <div class="input-label">{{elem.title}}</div>
-                                    <select class="select-default" formControlName="{{elem.name}}" *ngIf="elem.enum === 'StatutDeal'">
-                                        <option value="ACTIVE">{{ 'blanatApp.StatutDeal.ACTIVE' | translate }}</option>
-                                        <option value="HIDDEN">{{ 'blanatApp.StatutDeal.HIDDEN' | translate }}</option>
-                                        <option value="EXPIRED">{{ 'blanatApp.StatutDeal.EXPIRED' | translate }}</option>
-                                        <option value="PENDING">{{ 'blanatApp.StatutDeal.PENDING' | translate }}</option>
-                                    </select>
-                                    <select formControlName="{{elem.name}}" *ngIf="elem.enum === 'TypeDeal'">
-                                        <option value="DEAL">{{ 'blanatApp.TypeDeal.DEAL' | translate }}</option>
-                                        <option value="COUPON">{{ 'blanatApp.TypeDeal.COUPON' | translate }}</option>
+                                    <div class="input-label">Recherche par {{elem.label}}</div>
+                                    <select formControlName="{{elem.name}}">
+                                        <option *ngFor="let element of elem.enum" [ngValue]="element">{{ element }}</option>
                                     </select>
                                 </div>
                                 <div *ngSwitchCase="'list'">

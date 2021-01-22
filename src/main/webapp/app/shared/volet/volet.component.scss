@@ -3,8 +3,9 @@
 /* ==========================================================================
 ui voilet
 ========================================================================== */
+
 .btn-volet {
-  background: $cyan;
+  background: $teal;
   color: $gray-200;
   border-width: 0;
   right: 300px;
@@ -34,8 +35,8 @@ ui voilet
   transition: right 0.5s ease-in;
   z-index: 1000;
   margin-bottom: 1px;
-  border-left: solid 3px $cyan;
-  border-top: solid 3px $cyan;
+  border-left: solid 3px $teal;
+  border-top: solid 3px $teal;
   overflow: auto;
   &.closed {
     right: -300px;
@@ -65,8 +66,18 @@ input.input-default {
   }
 }
 
-input[type='checkbox']:checked + label {
-  background: $success;
+input[type='number'] {
+  width: 40%;
+  margin-right: 6px;
+}
+
+.date-picker {
+  width: 59%;
+}
+
+.date-label {
+  align-self: center;
+  width: 10%;
 }
 
 .input-label {
@@ -87,8 +98,26 @@ select {
   }
 }
 
-input[type='date'] {
-  width: 84%;
-  border: 1px solid $gray-400;
-  cursor: pointer;
+div.input-group {
+  margin-bottom: 1%;
+}
+
+.btn-checkbox {
+  input[type='checkbox'] {
+    display: none;
+  }
+
+  label {
+    width: 50%;
+    margin-left: 20%;
+    background: $white;
+    border: 1px solid $gray-400;
+    padding: 10px 0;
+    text-align: center;
+  }
+
+  input[type='checkbox']:checked + label {
+    background: $teal;
+    color: $white;
+  }
 }

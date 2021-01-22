@@ -28,13 +28,34 @@ export class VoletComponent implements OnInit {
   updateFiltre(filtre: any): void {
     const group = {};
     filtre.forEach((element: any) => {
-      group[element.title] = new FormControl('');
+      switch (element.type) {
+        case 'text':
+          group[element.name] = new FormControl('');
+          break;
+        case 'checkbox':
+          group[element.name] = new FormControl(element.isSelected);
+          break;
+        case 'select':
+          group[element.name] = new FormControl(element.initValue);
+          break;
+        case 'date':
+          if (element.isMin) group[element.nameMin] = new FormControl('');
+          if (element.isMax) group[element.nameMax] = new FormControl('');
+          break;
+        case 'num':
+          if (element.isMin) group[element.nameMin] = new FormControl('');
+          if (element.isMax) group[element.nameMax] = new FormControl('');
+          break;
+        default: {
+          break;
+        }
+      }
     });
     this.myForm = new FormGroup(group);
   }
 
   onSubmit(): void {
     // eslint-disable-next-line no-console
-    console.log('filtre');
+    console.log('filtre', this.myForm);
   }
 }

@@ -10,6 +10,8 @@ import { ITEMS_PER_PAGE } from 'app/shared/constants/pagination.constants';
 import { DealService } from './deal.service';
 import { DealDeleteDialogComponent } from './deal-delete-dialog.component';
 
+import { fields } from './deal-filter.data';
+
 @Component({
   selector: 'jhi-deal',
   templateUrl: './deal.component.html',
@@ -26,7 +28,7 @@ export class DealComponent implements OnInit, OnDestroy {
   closed: boolean;
   hasNextPage = true;
   name = 'Deals';
-  filtre: Array<object>;
+  filtre: any[] = fields;
 
   constructor(
     protected dealService: DealService,
@@ -43,20 +45,6 @@ export class DealComponent implements OnInit, OnDestroy {
     this.predicate = 'id';
     this.ascending = false;
     this.closed = true;
-    this.filtre = [
-      { name: 'title', title: 'title', type: 'text' },
-      { name: 'type', title: 'type', type: 'select', enum: 'TypeDeal' },
-      { name: 'like', title: 'like', type: 'num', max: true, min: true },
-      { name: 'dislike', title: 'dislike', type: 'num', max: true, min: true },
-      { name: 'show', title: 'show', type: 'num', max: true, min: true },
-      { name: 'statut', title: 'statut', type: 'select', enum: 'StatutDeal' },
-      { name: 'isDeleted', title: 'isDeleted', type: 'checkbox' },
-      { name: 'isBlocked', title: 'isBlocked', type: 'checkbox' },
-      { name: 'dateStart', title: 'dateStart', type: 'date' },
-      { name: 'dateEnd', title: 'dateEnd', type: 'date' },
-      { name: 'datePublication', title: 'datePublication', type: 'date' },
-      { name: 'dealCategories', title: 'dealCategories', type: 'list' },
-    ];
   }
 
   loadAll(): void {
